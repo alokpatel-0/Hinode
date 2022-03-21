@@ -1,0 +1,27 @@
+#offcanvasExample {
+  width: 450px;
+}
+.auth-with-google {
+  color: #fff;
+  width: 100%;
+  background-color: #dd4b39;
+  text-align: start;
+}
+.auth-with-facebook {
+  color: #fff;
+  width: 100%;
+  background-color: #4c69ba;
+  text-align: start;
+}
+.login-register-header {
+  font-weight: bolder;
+  font-size: 1.5rem;
+}
+.login-register-content {
+  color: #52b575;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+.offcanvas-body {
+  padding: 0;
+}
