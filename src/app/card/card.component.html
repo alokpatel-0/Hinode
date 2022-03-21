@@ -1,0 +1,33 @@
+<mat-card class="example-card" style="margin-top: 2vh">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <img
+      mat-card-image
+      src="https://zippy-ui.vercel.app/assets/images/Image-login_btpq7r.png"
+      alt="photo of a food"
+    />
+  </mat-card-header>
+
+  <mat-card-content>
+    <h3>{{ dummyData?.shopName }}</h3>
+  </mat-card-content>
+  <mat-card-content>
+    <div class="star_button">
+      <mat-icon>star</mat-icon>
+      <span>{{ dummyData?.rating.length == 0 ? 0: dummyData.rating }}</span>
+    </div>
+    <p>Not Zippian</p>
+  </mat-card-content>
+  <br />
+  <mat-card-content>
+    <p class="content">No offer Applicable</p>
+    <p class="bar">|</p>
+    <h5>Use Zippy</h5>
+  </mat-card-content>
+
+  <span><hr /></span>
+
+  <mat-card-actions>
+    <button mat-stroked-button color="accent">view</button>
+  </mat-card-actions>
+</mat-card>
