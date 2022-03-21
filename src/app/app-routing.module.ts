@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CardComponent } from './card/card.component';
 
 const routes: Routes = [
   {
@@ -7,6 +8,7 @@ const routes: Routes = [
     redirectTo: 'auth',
     pathMatch: 'full',
   },
+  { path: 'card', component: CardComponent },
   {
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),

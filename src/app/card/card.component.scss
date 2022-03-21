@@ -1,0 +1,58 @@
+.example-card {
+    width: 300px;
+    // height: 40vh;
+    cursor: pointer;
+  }
+  
+  .example-header-image {
+    background-size: cover;
+  }
+
+  .mat-card-image{
+    display: block;
+    //  margin: auto;
+    width: 50%;
+  }
+
+  .mat-stroked-button{
+    margin: 0;
+    // position: absolute;
+    margin-bottom: 1vh;
+    left: 38%;
+    transform: translateY(-50%);
+    display: flex;
+  }
+  
+  h3{
+      margin: auto;
+      text-align: center;
+  }
+
+  p{
+     margin-left: 9vw;
+     margin-top: -3vh;
+  }
+  .content{
+      margin-left: 3px;
+      font-size: 10px;
+  }
+  .bar{
+      margin-left: 7vw;
+      font-size: 18px;
+      margin-top: -4vh;
+  }
+
+  h5{
+      margin-left: 10vw;
+      margin-top: -4vh;
+      font-size: 16px;
+  }
+
+  .star_button{
+    text-decoration: none;
+    border: none;
+    outline: none;
+    background-color: greenyellow;
+    color: white;
+    width: 2.5vw;
+  }
