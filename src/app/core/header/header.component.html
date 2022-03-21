@@ -40,9 +40,14 @@
           >
         </li>
         <li class="mx-2 nav-item">
-          <a class="nav-link d-flex align-items-center">
+          <a class="nav-link d-flex align-items-center position-relative">
             <mat-icon class="mx-1">local_mall</mat-icon>
-            Cart</a
+            Cart
+            <span
+              class="mt-2 position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary"
+            >
+              0
+            </span></a
           >
         </li>
       </ul>
@@ -54,9 +59,9 @@
             data-bs-toggle="dropdown"
           >
             <mat-icon class="mx-1 dropdownicon">expand_more</mat-icon>
-            Admin</a
+            More</a
           >
-          <ul class="dropdown-menu dropdown-menu-end">
+          <div class="dropdown-menu dropdown-menu-end">
             <li>
               <a href="#" class="dropdown-item">Be a member of zippy</a>
             </li>
@@ -66,7 +71,7 @@
             <li>
               <a href="#" class="dropdown-item">Help</a>
             </li>
-          </ul>
+          </div>
         </li>
       </ul>
     </div>

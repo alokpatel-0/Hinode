@@ -1,3 +1,11 @@
 .collapse li a:hover {
   color: #20c997;
 }
+
+@media screen and (min-width: 980px) {
+  .dropdown:hover .dropdown-menu-end {
+    display: block;
+    margin-top: 0;
+    margin-left: -103.5px;
+  }
+}
