@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 
 @Component({
@@ -6,7 +6,7 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
   isReferFieldEnable = true;
   registerForm = this.fb.group({
     email: ['', Validators.required],
@@ -15,16 +15,12 @@ export class RegisterComponent implements OnInit {
   });
   constructor(private fb: FormBuilder) {}
 
-  ngOnInit(): void {
-    console.log('in register');
-  }
   handleRefer() {
     this.isReferFieldEnable = false;
     this.registerForm.addControl('referCode', new FormControl(''));
   }
   handleRegister() {
     if (this.registerForm.valid) {
-      console.log('Register form data is ', this.registerForm.value);
     }
   }
 }

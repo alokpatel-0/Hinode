@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
 import { AuthModule } from './auth/auth.module';
 import { MaterialModule } from './material.module';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,6 +18,7 @@ import { MaterialModule } from './material.module';
     MatSliderModule,
     AuthModule,
     MaterialModule,
+    CoreModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
