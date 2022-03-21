@@ -1,0 +1,26 @@
+<form class="example-form" [formGroup]="loginForm" (ngSubmit)="handleLogin()">
+  <mat-form-field class="example-full-width mb-3" appearance="fill">
+    <mat-label>Email</mat-label>
+    <input
+      type="email"
+      matInput
+      formControlName="email"
+      placeholder="Ex. dean@uk.com"
+      required
+    />
+    <!-- for valid email custom check go here  -->
+    <mat-error *ngIf="false"> Please enter a valid email address </mat-error>
+    <mat-error *ngIf="loginForm.invalid"> Email is required </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width mb-3" appearance="fill">
+    <mat-label>Password</mat-label>
+    <input type="password" matInput formControlName="password" />
+    <mat-error *ngIf="loginForm.invalid"> Password is required </mat-error>
+  </mat-form-field>
+  <button type="submit" class="btn submit-btn">Login</button>
+</form>
+<div>
+  <button class="btn btn-light my-3 border border-dark">
+    Forget Password?
+  </button>
+</div>
