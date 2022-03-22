@@ -18,11 +18,10 @@ import { CoreModule } from './core/core.module';
 import AuthComponent from './auth/auth.component';
 
 @NgModule({
-  declarations: [AppComponent, CardscreenComponent],
+  declarations: [AppComponent, CardscreenComponent,AuthComponent],
 
 
-@NgModule({
-  declarations: [AppComponent, CardComponent],
+
   imports: [
     BrowserModule,
     AppRoutingModule,
