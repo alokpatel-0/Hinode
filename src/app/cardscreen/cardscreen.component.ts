@@ -16,6 +16,7 @@ export class CardscreenComponent implements OnInit {
   sellingPrice!: number
   total!:number
   cartProduct!: number
+  discountpercentage!:number
 
   dummyCart = [
     {
@@ -63,15 +64,9 @@ export class CardscreenComponent implements OnInit {
 
   ngOnInit(): void {
   this. price = this.dummyCart.map(price => price.l.q.productprice).reduce((acc, price) => price + acc);
-    // console.log(this.price)
   this. discount = this.dummyCart.map(discount => discount.l.q.discount).reduce((acc, discount) => discount + acc);
-  //  console.log(this.discount);
-  
    this.sellingPrice = this.price - this.discount
-    // console.log(this.sellingPrice);
   this.total = this.sellingPrice + this.delievery
-    // console.log(this.total)
-
    this.cartProduct = this.dummyCart.length
 
   
