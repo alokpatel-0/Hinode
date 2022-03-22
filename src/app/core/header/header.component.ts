@@ -8,8 +8,8 @@ import { Component, HostListener, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
   hideNavbar: boolean = false;
 
-  @HostListener('window:scroll', ['$event'])
-  scrollHandler(event: any) {
+  @HostListener('window:scroll')
+  scrollHandler() {
     if (window.scrollY > document.getElementById('landingNavbar')!?.offsetTop)
       this.hideNavbar = true;
     else {
