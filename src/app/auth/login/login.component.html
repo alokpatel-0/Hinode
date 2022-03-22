@@ -8,10 +8,9 @@
       placeholder="Ex. dean@uk.com"
       required
     />
-    <!-- for valid email custom check go here  -->
-    <mat-error *ngIf="false"> Please enter a valid email address </mat-error>
     <mat-error *ngIf="loginForm.invalid"> Email is required </mat-error>
   </mat-form-field>
+
   <mat-form-field class="example-full-width mb-3" appearance="fill">
     <mat-label>Password</mat-label>
     <input type="password" matInput formControlName="password" />
