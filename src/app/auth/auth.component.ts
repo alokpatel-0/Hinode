@@ -7,7 +7,11 @@ import { Component } from '@angular/core';
 })
 export default class AuthComponent {
   showLoginPage = true;
+
   handleToggleShowPage() {
     this.showLoginPage = !this.showLoginPage;
+  }
+  handleSideNavClose() {
+    this.showLoginPage = true;
   }
 }

@@ -3,9 +3,11 @@
   tabindex="-1"
   id="offcanvasExample"
   aria-labelledby="offcanvasExampleLabel"
+  data-bs-scroll="true"
 >
   <button
     type="button"
+    (click)="handleSideNavClose()"
     class="btn-close text-reset my-4"
     data-bs-dismiss="offcanvas"
     aria-label="Close"
