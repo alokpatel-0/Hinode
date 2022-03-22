@@ -1,12 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CardComponent } from './card/card.component';
+import { LandingComponent } from './core/landing/landing.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'auth',
+    redirectTo: 'shop',
     pathMatch: 'full',
+  },
+  {
+    path: 'shop',
+    component: LandingComponent,
   },
   { path: 'card', component: CardComponent },
   {

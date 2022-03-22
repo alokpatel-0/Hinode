@@ -1,15 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
+  hideNavbar: boolean = false;
 
-  constructor() { }
-
-  ngOnInit(): void {
+  @HostListener('window:scroll')
+  scrollHandler() {
+    if (window.scrollY > document.getElementById('landingNavbar')!?.offsetTop)
+      this.hideNavbar = true;
+    else {
+      this.hideNavbar = false;
+    }
   }
 
+  constructor() {}
+
+  ngOnInit(): void {}
 }
