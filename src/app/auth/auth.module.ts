@@ -16,5 +16,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     MaterialModule,
     ReactiveFormsModule,
   ],
+  exports: [AuthComponent],
 })
 export class AuthModule {}
