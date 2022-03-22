@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CardscreenComponent } from './cardscreen/cardscreen.component';
 
 const routes: Routes = [
   {
@@ -11,6 +12,7 @@ const routes: Routes = [
     redirectTo: 'auth',
     pathMatch: 'full',
   },
+  {path: 'cartScreen' , component:CardscreenComponent}
 ];
 
 @NgModule({
