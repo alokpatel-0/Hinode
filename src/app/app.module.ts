@@ -11,6 +11,7 @@ import { AuthModule } from './auth/auth.module';
 import { MaterialModule } from './material.module';
 
 import { CoreModule } from './core/core.module';
+import AuthComponent from './auth/auth.component';
 
 @NgModule({
   declarations: [AppComponent, CardComponent, CardscreenComponent],
