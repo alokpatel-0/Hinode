@@ -10,10 +10,24 @@
     />
     <mat-error *ngIf="loginForm.invalid"> Email is required </mat-error>
   </mat-form-field>
-
-  <mat-form-field class="example-full-width mb-3" appearance="fill">
+  <mat-form-field appearance="fill" class="example-full-width mb-3">
     <mat-label>Password</mat-label>
-    <input type="password" matInput formControlName="password" />
+    <input
+      matInput
+      [type]="hide ? 'password' : 'text'"
+      formControlName="password"
+    />
+    <button
+      class="btn"
+      type="button"
+      mat-icon-button
+      matSuffix
+      (click)="hide = !hide"
+      [attr.aria-label]="'Hide password'"
+      [attr.aria-pressed]="hide"
+    >
+      <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+    </button>
     <mat-error *ngIf="loginForm.invalid"> Password is required </mat-error>
   </mat-form-field>
   <button type="submit" class="btn submit-btn">Login</button>

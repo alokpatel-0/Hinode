@@ -9,6 +9,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent {
+  hide = true;
   isReferFieldEnable = true;
   registerForm = this.fb.group({
     email: ['', Validators.required],

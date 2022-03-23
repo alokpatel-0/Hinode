@@ -9,6 +9,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
+  hide = true;
   loginForm = this.fb.group({
     email: ['', Validators.required],
     password: ['', Validators.required],
