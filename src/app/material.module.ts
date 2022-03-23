@@ -7,6 +7,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatFormFieldModule } from '@angular/material/form-field';
+
 
 const modules = [
   MatSliderModule,
@@ -16,6 +19,8 @@ const modules = [
   MatCardModule,
   MatSidenavModule,
   MatRadioModule,
+  MatSnackBarModule,
+  MatFormFieldModule,
 ];
 
 @NgModule({
