@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import basicUser from '../models/user';
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +9,7 @@ import { environment } from 'src/environments/environment';
 export class AuthService {
   api = environment.devUrl;
   isLogin = false;
-  userDetails: any;
+  userDetails!: basicUser;
   constructor(private http: HttpClient) {}
 
   login(data: any) {
@@ -27,6 +28,6 @@ export class AuthService {
   logOut() {
     localStorage.removeItem('user');
     this.isLogin = false;
-    this.userDetails = null;
+    this.userDetails = { email: '' };
   }
 }

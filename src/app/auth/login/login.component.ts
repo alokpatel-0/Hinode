@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import basicUser from 'src/app/shared/models/user';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
@@ -33,12 +34,10 @@ export class LoginComponent {
       console.log(this.loginForm.value);
       this.auth.login(this.loginForm.value).subscribe(
         (response) => {
-          console.log(response);
-
           localStorage.setItem('user', JSON.stringify(response));
           document.getElementById('side-nav-close-btn')?.click();
           this.auth.isLogin = true;
-          this.auth.userDetails = response;
+          this.auth.userDetails = response as unknown as basicUser;
           this.loginForm.reset();
           this.loginForm.markAsPristine();
           this.loginForm.markAsUntouched();
