@@ -1,0 +1,72 @@
+<div class="container-fluid">
+    <div class="header">
+        <h4>My Cart({{cartProduct}})</h4>
+        <p style="float: right; margin-top: -4vh; margin-right: 3vw; font-size: 16px;">more</p>
+    <hr>
+  <div *ngFor="let data of dummyCart" class="content">
+    <div class="row">
+        
+      <div class="col-sm-1 border border-dark ">
+        <img
+          src="{{data?.imageUrl?.[0]}}"
+         
+        />
+      </div>
+      <div class="col-sm-2 showDetails">
+        <h5>{{ data?.productName }}</h5>
+        <p>Pack of {{ data?.l?.q?.availablein }}</p>
+        <h5>{{ data?.l?.q?.productprice | currency: "INR" :true:'2.0' }}</h5>
+      </div>
+    </div>
+
+    <br />
+
+    <div class="row">
+      <div class="inline">
+        <button
+           class="counter"
+           style="background-color: #EFEFEF;"
+          (click)="decrement(data?.l?.id)"
+          [disabled]="data?.l?.orderQuantity == 0"
+        >
+          -
+        </button>
+
+        <span>{{ data?.l?.orderQuantity }}</span>
+        <button
+           class="counter"
+           style="background-color: #EFEFEF;"
+          (click)="increment(data?.l?.id)"
+        >
+          +
+        </button>
+ 
+        <button mat-flat-button>BUY LATER</button>
+        <button mat-flat-button>REMOVE</button>
+      </div>
+    </div>
+</div>
+<hr>
+<div class="placeOrder">
+    <button
+      mat-raised-button
+      style="background-color: #52B575;  width: 16vw; margin-bottom: 1vh; position: relative; left : 45vw; font-size: 20px; color: white; padding: .8vh;"
+    >
+      PLACE ORDER
+    </button>
+</div>
+  </div>
+  <div class="allDetails">
+      <br>
+      <div><h3>Billing details</h3></div>
+      <hr>
+      <div class="details"><h5>Price({{cartProduct}})<span>{{price | currency: 'INR' :true:'2.0'}}</span></h5></div><br>
+      <div class="details"><h5>Discount <span style="color: green;">-{{discount | currency : 'INR' :true:'2.0'}}</span></h5></div><br>
+      <div class="details"><h5>Selling Price <span>{{sellingPrice | currency : 'INR' :true:'2.0'}}</span></h5></div><br>
+      <div class="details"><h5>Delievery Charges  <span>{{  delievery  | currency : 'INR':true:'1.0'}}</span></h5></div><br>
+      <hr>
+      <div class="details"><h5>Total  <span>{{  total | currency : 'INR' :true:'2.0'}}</span></h5></div><br>
+  </div>
+
+ 
+  <button (click) = "getJsonData()">Hello</button>
