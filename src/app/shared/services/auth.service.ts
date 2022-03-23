@@ -9,7 +9,7 @@ import basicUser from '../models/user';
 export class AuthService {
   api = environment.devUrl;
   isLogin = false;
-  userDetails!: basicUser;
+  userDetails: basicUser = { email: '' };
   constructor(private http: HttpClient) {}
 
   login(data: any) {
@@ -22,7 +22,7 @@ export class AuthService {
     const data = JSON.parse(localStorage.getItem('user')!);
     if (data) {
       this.isLogin = true;
-      this.userDetails = data;
+      this.userDetails.email = data.user.email;
     }
   }
   logOut() {
