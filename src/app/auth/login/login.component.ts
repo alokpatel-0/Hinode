@@ -23,7 +23,6 @@ export class LoginComponent {
 
   handleLogin() {
     if (this.loginForm.valid) {
-      console.log(this.loginForm.value);
       this.auth.login(this.loginForm.value).subscribe({
         next: (response) => {
           localStorage.setItem('user', JSON.stringify(response));
