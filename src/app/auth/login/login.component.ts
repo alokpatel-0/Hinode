@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import basicUser from 'src/app/shared/models/user';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 
 @Component({
   selector: 'app-login',
@@ -18,35 +19,26 @@ export class LoginComponent {
   constructor(
     private fb: FormBuilder,
     private auth: AuthService,
-    private _snackBar: MatSnackBar
+    private snackBar: SnackbarService
   ) {}
-
-  openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action, { duration: 3000 });
-  }
-
-  error(err: any) {
-    this.openSnackBar(err.error.message, 'ok');
-  }
 
   handleLogin() {
     if (this.loginForm.valid) {
-      console.log(this.loginForm.value);
-      this.auth.login(this.loginForm.value).subscribe(
-        (response) => {
+      this.auth.login(this.loginForm.value).subscribe({
+        next: (response: any) => {
           localStorage.setItem('user', JSON.stringify(response));
           document.getElementById('side-nav-close-btn')?.click();
+          this.snackBar.open('Logged in successfully!', 'OK!', 2500);
           this.auth.isLogin = true;
-          this.auth.userDetails = response as unknown as basicUser;
+          this.auth.userDetails.email = response.user.email;
           this.loginForm.reset();
           this.loginForm.markAsPristine();
           this.loginForm.markAsUntouched();
-          this.openSnackBar('login successfully!', 'ok');
         },
-        (err) => this.error(err)
-      );
+        error: (err) => this.snackBar.open(err.error.message, 'OK!', 2500),
+      });
     } else {
-      this.openSnackBar('invalid fields', 'ok');
+      this.snackBar.open('Invalid fields', 'OK!', 2500);
     }
   }
 }
