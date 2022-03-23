@@ -13,6 +13,7 @@ import { MaterialModule } from './material.module';
 
 import { CoreModule } from './core/core.module';
 import AuthComponent from './auth/auth.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent, CardComponent],
@@ -27,6 +28,7 @@ import AuthComponent from './auth/auth.component';
     AuthModule,
     MaterialModule,
     CoreModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
