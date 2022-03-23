@@ -9,7 +9,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
-
+import { MatButtonModule } from '@angular/material/button';
 
 const modules = [
   MatSliderModule,
@@ -20,6 +20,8 @@ const modules = [
   MatSidenavModule,
   MatRadioModule,
   MatSnackBarModule,
+  MatFormFieldModule,
+  MatButtonModule,
   MatFormFieldModule,
 ];
 
