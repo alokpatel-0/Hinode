@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/shared/services/auth.service';
@@ -11,6 +11,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 export class RegisterComponent {
   hide = true;
   isReferFieldEnable = true;
+  @Output() isRegisterSuccessfully = new EventEmitter();
   registerForm = this.fb.group({
     email: ['', Validators.required],
     userName: ['', Validators.required],
@@ -37,9 +38,9 @@ export class RegisterComponent {
     if (this.registerForm.valid) {
       this.auth.register(this.registerForm.value).subscribe(
         (response) => {
+          this.isRegisterSuccessfully.emit();
           this.openSnackBar('register successfully!', 'ok');
         },
-
         (err) => this.error(err)
       );
     } else {

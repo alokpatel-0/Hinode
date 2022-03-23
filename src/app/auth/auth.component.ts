@@ -14,4 +14,7 @@ export default class AuthComponent {
   handleSideNavClose() {
     this.showLoginPage = true;
   }
+  moveToLoginPage() {
+    this.showLoginPage = true;
+  }
 }

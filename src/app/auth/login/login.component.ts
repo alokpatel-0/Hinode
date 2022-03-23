@@ -33,7 +33,15 @@ export class LoginComponent {
       console.log(this.loginForm.value);
       this.auth.login(this.loginForm.value).subscribe(
         (response) => {
+          console.log(response);
+
           localStorage.setItem('user', JSON.stringify(response));
+          document.getElementById('side-nav-close-btn')?.click();
+          this.auth.isLogin = true;
+          this.auth.userDetails = response;
+          this.loginForm.reset();
+          this.loginForm.markAsPristine();
+          this.loginForm.markAsUntouched();
           this.openSnackBar('login successfully!', 'ok');
         },
         (err) => this.error(err)

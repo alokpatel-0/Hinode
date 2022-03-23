@@ -7,6 +7,8 @@ import { environment } from 'src/environments/environment';
 })
 export class AuthService {
   api = environment.devUrl;
+  isLogin = false;
+  userDetails: any;
   constructor(private http: HttpClient) {}
 
   login(data: any) {
@@ -14,5 +16,17 @@ export class AuthService {
   }
   register(data: any) {
     return this.http.post(`${this.api}auth/signup`, data);
+  }
+  setUserDetailsFromLocalDb() {
+    const data = JSON.parse(localStorage.getItem('user')!);
+    if (data) {
+      this.isLogin = true;
+      this.userDetails = data;
+    }
+  }
+  logOut() {
+    localStorage.removeItem('user');
+    this.isLogin = false;
+    this.userDetails = null;
   }
 }
