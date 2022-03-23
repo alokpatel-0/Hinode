@@ -25,12 +25,12 @@ export class LoginComponent {
   handleLogin() {
     if (this.loginForm.valid) {
       this.auth.login(this.loginForm.value).subscribe({
-        next: (response) => {
+        next: (response: any) => {
           localStorage.setItem('user', JSON.stringify(response));
           document.getElementById('side-nav-close-btn')?.click();
           this.snackBar.open('Logged in successfully!', 'OK!', 2500);
           this.auth.isLogin = true;
-          this.auth.userDetails = response as unknown as basicUser;
+          this.auth.userDetails.email = response.user.email;
           this.loginForm.reset();
           this.loginForm.markAsPristine();
           this.loginForm.markAsUntouched();

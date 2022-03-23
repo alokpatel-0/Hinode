@@ -37,7 +37,6 @@ export class RegisterComponent {
           this.isRegisterSuccessfully.emit();
         },
         (err) => this.snackBar.open(err.error.message, 'OOPS!', 2500)
-        },
       );
     } else {
       this.snackBar.open('Invalid details', 'OOPS!', 2500);

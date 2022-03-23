@@ -57,8 +57,11 @@
           >
             <mat-icon class="mx-1 dropdownicon">person</mat-icon>
 
-            {{ auth.userDetails.user.email }}</a
+            {{ auth.userDetails.email }}</a
           >
+          <p>
+            <!-- {{ auth.userDetails.user.email | json }} -->
+          </p>
           <div class="user dropdown-menu">
             <li>
               <a href="#" class="dropdown-item">Profile</a>
