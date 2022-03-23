@@ -1,4 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -29,7 +30,10 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  constructor() {}
+  constructor(public auth: AuthService) {}
 
   ngOnInit(): void {}
+  handleLogout() {
+    this.auth.logOut();
+  }
 }

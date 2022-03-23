@@ -11,6 +11,7 @@
     class="btn-close text-reset my-4"
     data-bs-dismiss="offcanvas"
     aria-label="Close"
+    id="side-nav-close-btn"
   ></button>
   <div class="row">
     <div class="col-lg-6">
@@ -36,7 +37,7 @@
       <app-login></app-login>
     </div>
     <div *ngIf="!showLoginPage">
-      <app-register></app-register>
+      <app-register (isRegisterSuccessfully)="moveToLoginPage()"></app-register>
     </div>
     <div>
       <div class="mt-4 mb-2">
