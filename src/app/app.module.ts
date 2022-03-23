@@ -16,19 +16,15 @@ import { MaterialModule } from './material.module';
 
 import { CoreModule } from './core/core.module';
 import AuthComponent from './auth/auth.component';
-import { HttpClientModule } from '@angular/common/http';
+import {BillingDetailsComponent} from './billing-details/billing-details.component'
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    CardComponent,
-    CardscreenComponent,
-  ],
+  declarations: [AppComponent, CardComponent, CardscreenComponent,BillingDetailsComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatSliderModule,
+  MatSliderModule,
     MatButtonModule,
     HttpClientModule,
     MatCardModule,
