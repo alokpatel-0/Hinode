@@ -5,12 +5,17 @@ import { CardComponent } from './card/card.component';
 import { AddressFormComponent } from './core/address-form/address-form.component';
 import { CheckoutComponent } from './core/checkout/checkout.component';
 import { LandingComponent } from './core/landing/landing.component';
+import { BillingDetailsComponent } from './core/billing-details/billing-details.component';
 
 const routes: Routes = [
   {
     path: '',
     redirectTo: 'shop',
     pathMatch: 'full',
+  },
+  {
+    path: 'bill',
+    component: BillingDetailsComponent,
   },
   { path: 'cartScreen', component: CardscreenComponent },
   {
