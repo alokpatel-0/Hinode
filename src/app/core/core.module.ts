@@ -5,10 +5,25 @@ import { MaterialModule } from '../material.module';
 import { LoaderComponent } from './loader/loader.component';
 import { LandingComponent } from './landing/landing.component';
 import { RouterModule } from '@angular/router';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { AddressFormComponent } from './address-form/address-form.component';
 
 @NgModule({
-  declarations: [HeaderComponent, LoaderComponent, LandingComponent],
-  imports: [CommonModule, MaterialModule, RouterModule],
-  exports: [HeaderComponent, LoaderComponent, LandingComponent],
+  declarations: [
+    HeaderComponent,
+    LoaderComponent,
+    LandingComponent,
+    CheckoutComponent,
+    AddressFormComponent,
+  ],
+  imports: [CommonModule, MaterialModule, RouterModule, ReactiveFormsModule],
+  exports: [
+    HeaderComponent,
+    LoaderComponent,
+    LandingComponent,
+    CheckoutComponent,
+    AddressFormComponent,
+  ],
 })
 export class CoreModule {}
