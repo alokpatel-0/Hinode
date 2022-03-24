@@ -15,7 +15,25 @@
         <div class="col-sm-3 showDetails">
           <h5>{{ data?.productName }}</h5>
           <p>Pack of {{ data?.l?.q?.availablein }}</p>
-          <h5>{{ data?.l?.q?.productprice | currency: "INR":true:"2.0" }}</h5>
+          <h5>
+            {{ data.price * data.l.orderQuantity | currency: "INR" }}
+            <span style="margin-left: 1vw; font-size: 16px"
+              ><del *ngIf="data?.l?.q?.discount != null">{{
+                data?.l?.q?.productprice
+              }}</del></span
+            >
+            <span
+              style="margin-left: 1vw; font-size: 16px"
+              *ngIf="data?.l?.q?.discount == null"
+              >{{ data?.l?.q?.productprice | currency: "INR":true:"2.0" }}</span
+            >
+            <p
+              style="margin-left: 8vw; margin-top: -2vh; color: green"
+              *ngIf="data?.l?.q?.discount != null"
+            >
+              {{ data?.l?.q?.discount }}% Off
+            </p>
+          </h5>
         </div>
       </div>
 
@@ -68,10 +86,10 @@
   </div>
   <div class="allDetails">
     <app-billing-details
-      [price]="price"
-      [discount]="discount"
+      [price]="finalValue"
+      [discount]="discountvalue"
       [cartProduct]="cartProduct"
-      [sellingPrice]="sellingPrice"
+      [sellingPrice]=" finalSellingPrice"
       [total]="total"
       [delieveryCharges]="delieveryCharges"
       *ngIf="dummyCart?.length != 0"

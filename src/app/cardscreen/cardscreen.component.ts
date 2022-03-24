@@ -3,12 +3,9 @@ import { CardScreenService } from '../shared/services/card-screen.service';
 import { RootObject } from './cartscreen';
 import { environment } from './../../environments/environment';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import {
-  MatDialog,
-  MatDialogRef,
-  MAT_DIALOG_DATA,
-} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { DialogBoxComponent } from './dialog-box/dialog-box.component';
+import { LoaderService } from '../shared/services/loader.service';
 
 @Component({
   selector: 'app-cardscreen',
@@ -16,28 +13,34 @@ import { DialogBoxComponent } from './dialog-box/dialog-box.component';
   styleUrls: ['./cardscreen.component.scss'],
 })
 export class CardscreenComponent implements OnInit {
-  // cost: number = 33333;
-  price!: number;
+  price: number = 0;
   delieveryCharges = 1;
   discount!: number;
   value: any;
   sellingPrice!: number;
   total!: number;
   cartProduct!: number;
-  discountpercentage!: number;
+  totalDiscountValue = 0;
   dummyCart!: RootObject[];
   data!: any;
   showButton = true;
   devUrl = environment.devUrl;
+  discountvalue!: number;
+  orderquantity!: number;
+  finalValue : number = 0
+  finalSellingPrice : number = 0
+  finalDisountedValue : number = 0
 
   constructor(
     private cartService: CardScreenService,
     private _snackBar: MatSnackBar,
-    public dialog: MatDialog // public dialogRef :MatDialogRef<CardscreenComponent>
+    public dialog: MatDialog,
+    private loader: LoaderService
   ) {}
 
   ngOnInit(): void {
     this.getCartDetails();
+    // this.calculatePercentage()
   }
 
   openSnackBar(message: string, action: string) {
@@ -50,48 +53,32 @@ export class CardscreenComponent implements OnInit {
       width: '25vw',
       height: 'auto',
       hasBackdrop: true,
-      //   position: fixed ,
-      // left: 20%;
-      // top: 0%;
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(result);
+     
 
       if (result == 'yes') {
         this.removeCartData(data);
-      } else {
-        console.log('no data deleted');
-      }
+      } 
     });
   }
   getCartDetails() {
+    this.loader.show();
     const userid = JSON.parse(localStorage.getItem('user')!);
-    console.log(userid.user._id);
+    
     this.cartService.getCartData(userid?.user?._id).subscribe((dataa: any) => {
+      this.loader.hide();
       this.dummyCart = dataa.data;
       this.data = dataa;
 
-      console.log('dummyCard', this.dummyCart);
-      console.log('data', this.data);
-
-      this.getAllBillingDetails();
+     
+      this.calculatePercentage();
     });
   }
 
-  getAllBillingDetails() {
-    this.price = this.dummyCart
-      ?.map((price) => price.l.q.productprice)
-      .reduce((acc, price) => price + acc);
-    this.discount = this.dummyCart
-      ?.map((discount) => discount.l.q.discount)
-      .reduce((acc, discount) => discount + acc);
-    this.sellingPrice = this.price - this.discount;
-    this.total = this.sellingPrice + this.delieveryCharges;
-    this.cartProduct = this.dummyCart.length;
-  }
   removeCartData(data: any) {
-    console.log('Data', data);
+ 
     const userid = JSON.parse(localStorage.getItem('user')!);
 
     const payload = {
@@ -104,11 +91,12 @@ export class CardscreenComponent implements OnInit {
     this.cartService.removeCartDataFromJson(payload).subscribe((daa) => {
       this.getCartDetails();
       this.openSnackBar('Delete Data Succesfully', 'ok');
+      window.location.reload();
     });
   }
 
   incrementCart(data: any) {
-    console.log('add', data);
+    
     const userid = JSON.parse(localStorage.getItem('user')!);
     const payload = {
       action: 'add',
@@ -118,34 +106,75 @@ export class CardscreenComponent implements OnInit {
     };
 
     this.cartService.incrementCartData(payload).subscribe((daa) => {
-      console.log(data);
+      
+
       const itemId = data?.l.id;
-      this.dummyCart.filter((id) => {
-        if (itemId == id?.l?.id) {
-          this.value = id.l.orderQuantity++;
-          console.log(this.value);
-        }
-      });
+      this.getCartDetails();
+      window.location.reload()
     });
   }
 
   decrementCart(data: any) {
     const userid = JSON.parse(localStorage.getItem('user')!);
     const payload = {
-      action: 'remove',
+      action: 'sub',
       itemId: data?.l.q._id,
       shopId: this.data.shop._id,
       userid: userid.user._id,
     };
 
-    this.cartService.decrementCartData(payload).subscribe(() => {
+    this.cartService.decrementCartData(payload).subscribe((daa) => {
       const itemId = data?.l.id;
-      this.dummyCart.filter((id) => {
-        if (itemId == id?.l?.id) {
-          this.value = id.l.orderQuantity--;
-          console.log(this.value);
-        }
-      });
+      this.getCartDetails();
+      window.location.reload()
     });
+  }
+
+  calculatePercentage() {
+   
+
+ 
+
+    this.dummyCart?.map((discount: any) => {
+      
+      this.price = discount.l.q.productprice
+    
+
+      this.orderquantity = discount.l.orderQuantity;
+
+      
+
+      this.price = this.price * this.orderquantity;
+      this.finalValue = this.finalValue + this.price
+     
+
+      const discountPercentage = discount.l.q.discount;
+
+      const productPrice = discount.l.q.productprice;
+
+      const discountedpercentValue = (discountPercentage * productPrice) / 100;
+     
+
+      this.sellingPrice = (productPrice * this.orderquantity) - (discountedpercentValue * this.orderquantity);
+      
+
+      this.finalSellingPrice = this.sellingPrice +this.finalSellingPrice
+
+      
+      
+
+       discount['price'] = productPrice -discountedpercentValue;
+      
+
+     
+       this.cartProduct = this.dummyCart.length;
+     
+    });
+
+   
+    this.discountvalue = this.finalValue - this.finalSellingPrice;
+    this.total = this.finalSellingPrice + this.delieveryCharges;
+
+    
   }
 }
