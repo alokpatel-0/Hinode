@@ -13,6 +13,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatButtonModule } from '@angular/material/button';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatSelectModule } from '@angular/material/select';
 
 const modules = [
   MatSliderModule,
@@ -29,6 +31,8 @@ const modules = [
   MatExpansionModule,
   CdkAccordionModule,
   MatSlideToggleModule,
+  MatStepperModule,
+  MatSelectModule,
 ];
 
 @NgModule({
