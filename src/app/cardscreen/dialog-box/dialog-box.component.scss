@@ -1,0 +1,35 @@
+.container-fluid {
+  overflow: hidden;
+  // position: relative;
+}
+.container-fluid p {
+  text-align: justify;
+  font-size: 20px;
+}
+
+
+#notdelete{
+margin-left: 11vw;
+ margin-bottom: 2vh; 
+  outline: none ; border-color :  gray ;
+   font-size: 14px;background-color: white;
+    cursor: pointer;
+   
+}
+#notdelete:hover {
+//   background-color: #000;
+  border-color: #1d8efa !important;
+  color: #1d8efa !important;
+}
+#delete{
+    margin-left: 1vw ;
+     margin-bottom: 2vh;
+      background-color: #1D8EFA; 
+      color: white; 
+      outline: none;
+       border: none; 
+       cursor: pointer;
+}
+#delete:hover{
+ opacity: 0.8;
+}

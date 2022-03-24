@@ -20,7 +20,7 @@ export class CardScreenService {
     });
   }
 
-  removeCartData(payload: any) {
+  removeCartDataFromJson(payload: any) {
     return this.http.post(`${this.endpoint}users/cart`, payload, {
       headers: this.headers,
     });

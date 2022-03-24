@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CardscreenComponent } from './cardscreen/cardscreen.component';
 import { CardComponent } from './card/card.component';
+import { AddressFormComponent } from './core/address-form/address-form.component';
+import { CheckoutComponent } from './core/checkout/checkout.component';
 import { LandingComponent } from './core/landing/landing.component';
 
 const routes: Routes = [
@@ -14,6 +16,14 @@ const routes: Routes = [
   {
     path: 'shop',
     component: LandingComponent,
+  },
+  {
+    path: 'checkout',
+    component: CheckoutComponent,
+  },
+  {
+    path: 'address',
+    component: AddressFormComponent,
   },
   { path: 'card', component: CardComponent },
   {

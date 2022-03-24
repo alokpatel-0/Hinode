@@ -1,14 +1,14 @@
 .container-fluid {
   width: 100%;
-  height: auto;
-  margin-top: 5vw;
+  height: 100vh;
+  margin-top: 1.5vw;
   float: left;
   margin-bottom: 1vw;
-  //   box-shadow: 2px 2px 4px 3px darkgray;
+  position: absolute;
 }
 
 img {
-  width: 130px;
+  width: 10vw;
   height: 10vh;
   margin-top: 1vh;
 }
@@ -47,9 +47,9 @@ p {
   width: 25vw;
   background-color: white;
   position: absolute;
-  top: 12.5vh;
+  top: 3vh;
   border-radius: 4px;
-  background-color: white;
+  // background-color: white;
 }
 
 

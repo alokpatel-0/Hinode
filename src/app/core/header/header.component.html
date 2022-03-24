@@ -1,10 +1,10 @@
 <nav
   id="headerNavbar"
-  class="navbar navbar-expand-lg navbar-light bg-light fixed-top"
+  class="navbar navbar-expand-lg navbar-light bg-light sticky-top"
   [ngClass]="hideNavbar ? 'd-none' : 'd-block'"
 >
   <div class="container-fluid">
-    <a class="ms-3 navbar-brand">
+    <a class="ms-3 navbar-brand" routerLink="/shop">
       <img
         src="../../../assets/zippyfullicon.png"
         alt="Zippy Icon"
@@ -37,7 +37,7 @@
             Offer</a
           >
         </li>
-        <li class="mx-2 nav-item">
+        <li class="mx-2 nav-item" *ngIf="!auth.isLogin">
           <a
             data-bs-toggle="offcanvas"
             href="#offcanvasExample"
@@ -49,6 +49,32 @@
             Signin</a
           >
         </li>
+        <li class="mx-2 nav-item dropdown" *ngIf="auth.isLogin">
+          <a
+            href="#"
+            class="nav-link d-flex align-items-center"
+            data-bs-toggle="dropdown"
+          >
+            <mat-icon class="mx-1 dropdownicon">person</mat-icon>
+
+            {{ auth.userDetails.email }}</a
+          >
+          <div class="user dropdown-menu">
+            <li>
+              <a href="#" class="dropdown-item">Profile</a>
+            </li>
+            <li>
+              <button
+                type="button"
+                class="btn dropdown-item"
+                (click)="handleLogout()"
+              >
+                Logout
+              </button>
+            </li>
+          </div>
+        </li>
+
         <li class="mx-2 nav-item">
           <a class="nav-link d-flex align-items-center position-relative">
             <mat-icon class="mx-1">local_mall</mat-icon>
