@@ -11,8 +11,7 @@ import { AuthModule } from './auth/auth.module';
 import { MaterialModule } from './material.module';
 
 import { CoreModule } from './core/core.module';
-import AuthComponent from './auth/auth.component';
-
+import { SellerModule } from './seller/seller.module';
 
 @NgModule({
   declarations: [AppComponent, CardComponent, CardscreenComponent],
@@ -24,6 +23,7 @@ import AuthComponent from './auth/auth.component';
     AuthModule,
     MaterialModule,
     CoreModule,
+    SellerModule,
     HttpClientModule,
   ],
   providers: [],
