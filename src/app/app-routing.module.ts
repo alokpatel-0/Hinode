@@ -5,6 +5,7 @@ import { CardComponent } from './card/card.component';
 import { AddressFormComponent } from './core/address-form/address-form.component';
 import { CheckoutComponent } from './core/checkout/checkout.component';
 import { LandingComponent } from './core/landing/landing.component';
+import { ShopDetailsComponent } from './core/shop-details/shop-details.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,7 @@ const routes: Routes = [
     component: AddressFormComponent,
   },
   { path: 'card', component: CardComponent },
+  { path: 'shop/:id', component: ShopDetailsComponent },
   {
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
