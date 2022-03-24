@@ -10,13 +10,13 @@ export class CardscreenComponent implements OnInit {
   cost: number = 33333;
   price: number = 728;
   delievery = 1;
-  discount!:number
+  discount!: number;
   value: any;
-  res!:number
-  sellingPrice!: number
-  total!:number
-  cartProduct!: number
-  discountpercentage!:number
+  res!: number;
+  sellingPrice!: number;
+  total!: number;
+  cartProduct!: number;
+  discountpercentage!: number;
 
   dummyCart = [
     {
@@ -49,7 +49,7 @@ export class CardscreenComponent implements OnInit {
           availablein: '1 kg',
           productprice: 584,
           inStockNumber: 22,
-          discount: 40
+          discount: 40,
         },
       },
       parentId: '60c5a8ee843f7c3a4aad043a',
@@ -60,42 +60,39 @@ export class CardscreenComponent implements OnInit {
       ],
     },
   ];
-  constructor( private cartService : CardScreenService) {}
+  constructor(private cartService: CardScreenService) {}
 
   ngOnInit(): void {
-  this. price = this.dummyCart.map(price => price.l.q.productprice).reduce((acc, price) => price + acc);
-  this. discount = this.dummyCart.map(discount => discount.l.q.discount).reduce((acc, discount) => discount + acc);
-   this.sellingPrice = this.price - this.discount
-  this.total = this.sellingPrice + this.delievery
-   this.cartProduct = this.dummyCart.length
-
-  
+    this.price = this.dummyCart
+      .map((price) => price.l.q.productprice)
+      .reduce((acc, price) => price + acc);
+    this.discount = this.dummyCart
+      .map((discount) => discount.l.q.discount)
+      .reduce((acc, discount) => discount + acc);
+    this.sellingPrice = this.price - this.discount;
+    this.total = this.sellingPrice + this.delievery;
+    this.cartProduct = this.dummyCart.length;
   }
-  increment(ides : any) {
+  increment(ides: any) {
     this.dummyCart.filter((id) => {
-      if(ides === id?.l?.id){
-          this.value = id.l.orderQuantity++;
-            console.log(this.value)
+      if (ides === id?.l?.id) {
+        this.value = id.l.orderQuantity++;
+        console.log(this.value);
       }
-    })
-    
+    });
   }
-  decrement(ides : any) {
+  decrement(ides: any) {
     this.dummyCart.filter((id) => {
-      if(ides === id?.l?.id){
-          this.value = id.l.orderQuantity--;
-            console.log(this.value)
+      if (ides === id?.l?.id) {
+        this.value = id.l.orderQuantity--;
+        console.log(this.value);
       }
-    })
+    });
   }
 
-  getJsonData(){
+  getJsonData() {
     this.cartService.getCartData().subscribe((data) => {
       console.log(data);
-    })
+    });
   }
-
-
-
 }
-
