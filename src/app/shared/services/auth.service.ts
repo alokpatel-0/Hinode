@@ -1,12 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import basicUser from '../models/user';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   api = environment.devUrl;
+  isLogin = false;
+  userDetails: basicUser = { email: '' };
   constructor(private http: HttpClient) {}
 
   login(data: any) {
@@ -14,5 +17,17 @@ export class AuthService {
   }
   register(data: any) {
     return this.http.post(`${this.api}auth/signup`, data);
+  }
+  setUserDetailsFromLocalDb() {
+    const data = JSON.parse(localStorage.getItem('user')!);
+    if (data) {
+      this.isLogin = true;
+      this.userDetails.email = data.user.email;
+    }
+  }
+  logOut() {
+    localStorage.removeItem('user');
+    this.isLogin = false;
+    this.userDetails = { email: '' };
   }
 }

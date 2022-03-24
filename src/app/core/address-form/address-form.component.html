@@ -1,30 +1,34 @@
 <div class="container-fluid w-50">
   <div class="d-flex flex-column justify-content-center">
-    <form>
+    <form [formGroup]="addressForm" (ngSubmit)="handleSaveClick()">
       <h5 class="text-success">Add a new address</h5>
       <div class="row">
         <div class="col">
           <mat-form-field class="w-100" appearance="outline">
             <mat-label> Full Name </mat-label>
             <input
+              formControlName="name"
               matInput
               type="text"
-              name="Full Name"
+              name="name"
               id=""
               placeholder="Enter your full name"
             />
+            <mat-error>Enter a valid full name</mat-error>
           </mat-form-field>
         </div>
         <div class="col">
           <mat-form-field class="w-100" appearance="outline">
             <mat-label> Contact Number </mat-label>
             <input
+              formControlName="mobileNumber"
               matInput
               type="number"
-              name="Contact Number"
+              name="mobileNumber"
               id=""
               placeholder="Enter your number"
             />
+            <mat-error>Enter a valid contact number</mat-error>
           </mat-form-field>
         </div>
       </div>
@@ -33,6 +37,7 @@
           <mat-form-field class="w-100" appearance="outline">
             <mat-label>Address(Area and Street)</mat-label>
             <textarea
+              formControlName="address"
               matInput
               cdkTextareaAutosize
               cdkAutosizeMinRows="1"
@@ -40,6 +45,7 @@
               cols="30"
               rows="10"
             ></textarea>
+            <mat-error>Enter a valid address</mat-error>
           </mat-form-field>
         </div>
       </div>
@@ -47,13 +53,27 @@
         <div class="col">
           <mat-form-field class="w-100" appearance="outline">
             <mat-label>Pincode </mat-label>
-            <input matInput type="text" name="pincode" id="" />
+            <input
+              formControlName="postalCode"
+              matInput
+              type="number"
+              name="pincode"
+              id=""
+            />
+            <mat-error>Enter a valid Pincode</mat-error>
           </mat-form-field>
         </div>
         <div class="col">
           <mat-form-field class="w-100" appearance="outline">
             <mat-label> Select State</mat-label>
-            <input matInput type="text" name="selectState" id="" />
+            <input
+              formControlName="state"
+              matInput
+              type="text"
+              name="selectState"
+              id=""
+            />
+            <mat-error>Enter a valid state </mat-error>
           </mat-form-field>
         </div>
       </div>
@@ -61,13 +81,27 @@
         <div class="col">
           <mat-form-field class="w-100" appearance="outline">
             <mat-label>City/District/Town </mat-label>
-            <input matInput type="text" name="city" id="" />
+            <input
+              formControlName="city"
+              matInput
+              type="text"
+              name="city"
+              id=""
+            />
+            <mat-error>Enter a valid city/district/town</mat-error>
           </mat-form-field>
         </div>
         <div class="col">
           <mat-form-field class="w-100" appearance="outline">
             <mat-label> Locality</mat-label>
-            <input matInput type="text" name="Locality" id="" />
+            <input
+              formControlName="locality"
+              matInput
+              type="text"
+              name="Locality"
+              id=""
+            />
+            <mat-error>Enter a valid locality</mat-error>
           </mat-form-field>
         </div>
       </div>
@@ -75,27 +109,34 @@
         <div class="col">
           <mat-form-field class="w-100" appearance="outline">
             <mat-label>Landmark(optional) </mat-label>
-            <input matInput type="text" name="landmark" id="" />
+            <input
+              formControlName="landmark"
+              matInput
+              type="text"
+              name="landmark"
+              id=""
+            />
           </mat-form-field>
         </div>
         <div class="col">
           <mat-form-field class="w-100" appearance="outline">
             <mat-label> Alternate Phone(optional) </mat-label>
-            <input matInput type="text" name="alternatePhone" id="" />
+            <input
+              formControlName="alternateNumber"
+              matInput
+              type="text"
+              name="alternatePhone"
+              id=""
+            />
           </mat-form-field>
         </div>
       </div>
+      <!-- (click)="handleSaveClick()" -->
+      <button class="btn btn-success px-5 mx-3" type="submit">Save</button>
       <button
         (click)="router.navigate(['checkout'])"
         class="btn btn-success px-5 mx-3"
-        type="submit"
-      >
-        Save
-      </button>
-      <button
-        (click)="router.navigate(['checkout'])"
-        class="btn btn-success px-5 mx-3"
-        type="submit"
+        type="button"
       >
         Cancel
       </button>
