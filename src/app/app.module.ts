@@ -15,6 +15,7 @@ import AuthComponent from './auth/auth.component';
 import { BillingDetailsComponent } from './billing-details/billing-details.component';
 import { DialogBoxComponent } from './cardscreen/dialog-box/dialog-box.component';
 import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
+import { SellerModule } from './seller/seller.module';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
     AuthModule,
     MaterialModule,
     CoreModule,
+    SellerModule,
     HttpClientModule,
   ],
   providers: [
