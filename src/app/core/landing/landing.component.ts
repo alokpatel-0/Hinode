@@ -20,9 +20,7 @@ export class LandingComponent implements OnInit {
 
   showCard(){
     this.cartService.viewCardOnLandingPage().subscribe((data) => {
-      console.log("data is" , data)
       this.cardsData = data
-      console.log('carddata', this.cardsData)
     })
   }
 

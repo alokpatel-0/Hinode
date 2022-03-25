@@ -5,8 +5,6 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CardscreenComponent } from './cardscreen/cardscreen.component';
 import { HttpClientModule } from '@angular/common/http';
-
-// import { CardComponent } from './card/card.component';
 import { AuthModule } from './auth/auth.module';
 import { MaterialModule } from './material.module';
 

@@ -17,9 +17,9 @@ export class CardComponent implements OnInit {
 
   showCard() {
     this.cardservice.viewCardOnLandingPage().subscribe((data: any) => {
-      // console.log('data is', data);
+     
       this.cardData = data.data;
-      // console.log('carddata', this.cardData);
+     
     });
   }
 }
