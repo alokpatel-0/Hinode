@@ -4,12 +4,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CardscreenComponent } from './cardscreen/cardscreen.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+
 import { AuthModule } from './auth/auth.module';
 import { MaterialModule } from './material.module';
 
 import { CoreModule } from './core/core.module';
-import AuthComponent from './auth/auth.component';
+import { AuthInterceptorInterceptor } from './auth-interceptor.interceptor';
 import { BillingDetailsComponent } from './billing-details/billing-details.component';
 import { DialogBoxComponent } from './cardscreen/dialog-box/dialog-box.component';
 import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
@@ -35,6 +36,11 @@ import { SellerModule } from './seller/seller.module';
     HttpClientModule,
   ],
   providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorInterceptor,
+      multi: true,
+    },
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: false } },
   ],
   bootstrap: [AppComponent],
