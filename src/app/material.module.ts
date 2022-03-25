@@ -11,6 +11,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatStepperModule } from '@angular/material/stepper';
@@ -28,6 +29,7 @@ const modules = [
   MatFormFieldModule,
   MatButtonModule,
   MatFormFieldModule,
+  MatDialogModule,
   MatExpansionModule,
   CdkAccordionModule,
   MatSlideToggleModule,

@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { CardScreenService } from '../card-screen.service';
+import { CardScreenService } from '../shared/services/card-screen.service';
+import { RootObject } from './cartscreen';
+import { environment } from './../../environments/environment';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogBoxComponent } from './dialog-box/dialog-box.component';
+import { LoaderService } from '../shared/services/loader.service';
 
 @Component({
   selector: 'app-cardscreen',
@@ -7,95 +13,150 @@ import { CardScreenService } from '../card-screen.service';
   styleUrls: ['./cardscreen.component.scss'],
 })
 export class CardscreenComponent implements OnInit {
-  cost: number = 33333;
-  price: number = 728;
-  delievery = 1;
-  discount!:number
+  price: number = 0;
+  delieveryCharges = 1;
+  discount!: number;
   value: any;
-  res!:number
-  sellingPrice!: number
-  total!:number
-  cartProduct!: number
-  discountpercentage!:number
+  sellingPrice!: number;
+  total!: number;
+  cartProduct!: number;
+  totalDiscountValue = 0;
+  dummyCart!: RootObject[];
+  data!: any;
+  showButton = true;
+  devUrl = environment.devUrl;
+  discountvalue!: number;
+  orderquantity!: number;
+  finalValue: number = 0;
+  finalSellingPrice: number = 0;
+  finalDisountedValue: number = 0;
+  productPrice: number = 0;
+  discountedpercentValue : number = 0;
 
-  dummyCart = [
-    {
-      l: {
-        orderQuantity: 0,
-        id: '62386f8dca2a920016e1687c',
-        q: {
-          _id: '60c5a8fa843f7c3a4aad043b',
-          productId: '60c5a8ee843f7c3a4aad043a',
-          availablein: '500 gm',
-          productprice: 222,
-          inStockNumber: 22,
-          discount: 20,
-        },
-      },
-      parentId: '60c5a8ee843f7c3a4aad043a',
-      productName: 'TEST NAME 1',
-      imageUrl: [
-        '/public/images/1623566596737-Screenshot from 2021-05-26 12-00-46.png',
-        '/public/images/1623566596739-Screenshot from 2021-05-07 14-53-14.png',
-      ],
-    },
-    {
-      l: {
-        orderQuantity: 0,
-        id: '62386f8dc34a2a920016e1687c',
-        q: {
-          _id: '60c5a8fa843f7c3a4aad043b',
-          productId: '60c5a8ee843f7c3a4aad043a',
-          availablein: '1 kg',
-          productprice: 584,
-          inStockNumber: 22,
-          discount: 40
-        },
-      },
-      parentId: '60c5a8ee843f7c3a4aad043a',
-      productName: 'TEST NAME 2',
-      imageUrl: [
-        '/public/images/1623566596737-Screenshot from 2021-05-26 12-00-46.png',
-        '/public/images/1623566596739-Screenshot from 2021-05-07 14-53-14.png',
-      ],
-    },
-  ];
-  constructor( private cartService : CardScreenService) {}
+  constructor(
+    private cartService: CardScreenService,
+    private _snackBar: MatSnackBar,
+    public dialog: MatDialog,
+    private loader: LoaderService
+  ) {}
 
   ngOnInit(): void {
-  this. price = this.dummyCart.map(price => price.l.q.productprice).reduce((acc, price) => price + acc);
-  this. discount = this.dummyCart.map(discount => discount.l.q.discount).reduce((acc, discount) => discount + acc);
-   this.sellingPrice = this.price - this.discount
-  this.total = this.sellingPrice + this.delievery
-   this.cartProduct = this.dummyCart.length
-
-  
+    this.getCartDetails();
   }
-  increment(ides : any) {
-    this.dummyCart.filter((id) => {
-      if(ides === id?.l?.id){
-          this.value = id.l.orderQuantity++;
-            console.log(this.value)
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, { duration: 3000 });
+  }
+
+  openDialogBox(data: any) {
+    const dialogRef = this.dialog.open(DialogBoxComponent, {
+      disableClose: true,
+      width: '25vw',
+      height: 'auto',
+      hasBackdrop: true,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result == 'yes') {
+        this.removeCartData(data);
       }
-    })
-    
+    });
   }
-  decrement(ides : any) {
-    this.dummyCart.filter((id) => {
-      if(ides === id?.l?.id){
-          this.value = id.l.orderQuantity--;
-            console.log(this.value)
-      }
-    })
-  }
+  getCartDetails() {
+    this.loader.show();
+    const userid = JSON.parse(localStorage.getItem('user')!);
 
-  getJsonData(){
-    this.cartService.getCartData().subscribe((data) => {
-      console.log(data);
-    })
+    this.cartService.getCartData(userid?.user?._id).subscribe((dataa: any) => {
+      this.loader.hide();
+      this.dummyCart = dataa.data;
+      this.data = dataa;
+
+      this.calculatePercentage();
+    });
   }
 
+  removeCartData(data: any) {
+    const userid = JSON.parse(localStorage.getItem('user')!);
 
+    const payload = {
+      action: 'remove',
+      itemId: data?.l.id,
+      shopId: this.data.shop._id,
+      userId: userid.user._id,
+    };
 
+    this.cartService.removeCartDataFromJson(payload).subscribe((daa) => {
+      this.getCartDetails();
+      this.openSnackBar('Delete Data Succesfully', 'ok');
+      window.location.reload();
+    });
+  }
+
+  incrementCart(data: any) {
+    const userid = JSON.parse(localStorage.getItem('user')!);
+    const payload = {
+      action: 'add',
+      itemId: data?.l.q._id,
+      shopId: this.data.shop._id,
+      userid: userid.user._id,
+    };
+
+    this.cartService.incrementCartData(payload).subscribe((daa) => {
+      const itemId = data?.l.id;
+      this.getCartDetails();
+      window.location.reload();
+    });
+  }
+
+  decrementCart(data: any) {
+    const userid = JSON.parse(localStorage.getItem('user')!);
+    const payload = {
+      action: 'sub',
+      itemId: data?.l.q._id,
+      shopId: this.data.shop._id,
+      userid: userid.user._id,
+    };
+
+    this.cartService.decrementCartData(payload).subscribe((daa) => {
+      const itemId = data?.l.id;
+      this.getCartDetails();
+    });
+  }
+
+  calculatePercentage() {
+    this.price = 0;
+    this.sellingPrice = 0;
+    this.finalSellingPrice = 0;
+    this.finalDisountedValue = 0;
+    this.discountedpercentValue = 0
+
+    this.dummyCart?.map((discount: any) => {
+      this.price = discount.l.q.productprice;
+
+      this.orderquantity = discount.l.orderQuantity;
+
+      this.price = this.price * this.orderquantity;
+      this.finalValue = this.finalValue + this.price;
+
+      const discountPercentage = discount.l.q.discount;
+
+      this.productPrice = discount.l.q.productprice;
+
+       this.discountedpercentValue =
+        (discountPercentage * this.productPrice) / 100;
+
+      this.sellingPrice =
+        this.productPrice * this.orderquantity -
+        this.discountedpercentValue * this.orderquantity;
+
+      this.finalSellingPrice = this.sellingPrice + this.finalSellingPrice;
+
+      discount['price'] = this.productPrice - this.discountedpercentValue;
+
+      this.cartProduct = this.dummyCart.length;
+    });
+
+    this.discountvalue = this.finalValue - this.finalSellingPrice;
+    this.total = this.finalSellingPrice + this.delieveryCharges;
+  }
 }
-
