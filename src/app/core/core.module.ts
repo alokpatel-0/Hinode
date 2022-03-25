@@ -8,6 +8,8 @@ import { RouterModule } from '@angular/router';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AddressFormComponent } from './address-form/address-form.component';
+import { CardComponent } from '../card/card.component';
+import { ShopDetailsComponent } from './shop-details/shop-details.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,8 @@ import { AddressFormComponent } from './address-form/address-form.component';
     LandingComponent,
     CheckoutComponent,
     AddressFormComponent,
+    CardComponent,
+    ShopDetailsComponent,
   ],
   imports: [CommonModule, MaterialModule, RouterModule, ReactiveFormsModule],
   exports: [
@@ -24,6 +28,7 @@ import { AddressFormComponent } from './address-form/address-form.component';
     LandingComponent,
     CheckoutComponent,
     AddressFormComponent,
+    CardComponent,
   ],
 })
 export class CoreModule {}
