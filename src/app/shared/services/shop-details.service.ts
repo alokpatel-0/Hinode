@@ -14,4 +14,10 @@ export class ShopDetailsService {
   getShopDataWithId(id: string) {
     return this.http.get(`${this.api}getShopData?payload=${id}`);
   }
+  addToCart(data: any) {
+    return this.http.post(`${this.api}users/cart`, data);
+  }
+  removeFromCart(data: any) {
+    return this.http.post(`${this.api}users/cart`, data);
+  }
 }

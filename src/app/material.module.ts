@@ -33,6 +33,7 @@ const modules = [
   MatSlideToggleModule,
   MatStepperModule,
   MatSelectModule,
+  MatSidenavModule,
 ];
 
 @NgModule({

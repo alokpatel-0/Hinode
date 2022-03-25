@@ -10,6 +10,9 @@ export interface IQuantity {
   productId: string;
   productprice: number;
   _id: string;
+  productPriceWithDiscount?: number;
+  categoryName?: string;
+  orderQuantity?: number;
 }
 
 export interface IShopDetail {

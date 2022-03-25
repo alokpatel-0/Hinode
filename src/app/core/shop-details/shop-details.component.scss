@@ -1,3 +1,22 @@
+.app-green-bg {
+  background-color: #5bc574;
+  color: #fff;
+}
+
+#offcanvasExample1.offcanvas-start {
+  width: 450px !important;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 64px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
 .shop-details-categories:first-child {
   color: #5bc574;
 }
@@ -57,4 +76,8 @@
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #5bc574;
+}
+
+#offcanvasExample1 {
+  background-color: #e9ecee !important;
 }

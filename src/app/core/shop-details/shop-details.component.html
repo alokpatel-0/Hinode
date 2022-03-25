@@ -60,7 +60,15 @@
             <div class="d-flex justify-content-end">
               <div>
                 <div class="d-flex justify-content-end">
-                  <button class="btn btn-light border">Add</button>
+                  <button
+                    class="btn btn-light border"
+                    (click)="handleAdd(data)"
+                    data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasExample1"
+                    aria-controls="offcanvasExample"
+                  >
+                    Add
+                  </button>
                 </div>
                 <p class="mt-3">
                   Available in
@@ -92,5 +100,77 @@
         </p>
       </div>
     </mat-card>
+  </div>
+</div>
+
+<div
+  class="offcanvas show offcanvas-start"
+  tabindex="-1"
+  id="offcanvasExample1"
+  aria-labelledby="offcanvasExampleLabel"
+>
+  <div class="d-flex justify-content-end m-3">
+    <button
+      type="button"
+      class="btn-close text-reset"
+      data-bs-dismiss="offcanvas"
+      aria-label="Close"
+    ></button>
+  </div>
+  <div class="m-2">
+    <mat-card>
+      <div class="row">
+        <div class="col-lg-6" *ngIf="cartItems && cartItems.length > 0">
+          {{ cartItems[0].categoryName }}
+        </div>
+        <div class="col-lg-6 d-flex justify-content-end">stars</div>
+      </div>
+    </mat-card>
+  </div>
+  <div *ngFor="let cartItem of cartItems; index as i">
+    <div class="offcanvas-body mx-4 my-2">
+      <mat-card>
+        <div class="row">
+          <div class="col-lg-4">
+            <img
+              src="https://i.picsum.photos/id/0/5616/3744.jpg?hmac=3GAAioiQziMGEtLbfrdbcoenXoWAW-zlyEAMkfEdBzQ"
+              alt="product-1"
+              style="width: 70px; height: 70px"
+            />
+          </div>
+          <div class="col-lg-3">
+            <p>{{ cartItem.availablein }}</p>
+            <p *ngIf="cartItem.discount">{{ cartItem.discount }}%</p>
+          </div>
+          <div class="col-lg-5 d-flex justify-content-end">
+            <div>
+              <p class="text-end">
+                {{
+                  cartItem.productPriceWithDiscount | currency: "INR":"symbol"
+                }}
+              </p>
+              <p class="text-end" style="color: grey">
+                <s>{{ cartItem.productprice | currency: "INR":"symbol" }}</s>
+              </p>
+
+              <button
+                *ngIf="counter !== 0"
+                class="btn app-green-bg border px-2 mx-1"
+                (click)="addToCart(cartItem, i)"
+              >
+                -
+              </button>
+              <button class="btn border border-dark mx-1">{{ counter }}</button>
+              <button
+                class="btn app-green-bg border px-2 mx-1"
+                (click)="removeFromCart(cartItem, i)"
+              >
+                +
+              </button>
+            </div>
+          </div>
+        </div>
+      </mat-card>
+    </div>
   </div>
 </div>
