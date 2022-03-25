@@ -9,6 +9,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AddressFormComponent } from './address-form/address-form.component';
 import { CardComponent } from '../card/card.component';
+import { ShopDetailsComponent } from './shop-details/shop-details.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { CardComponent } from '../card/card.component';
     LandingComponent,
     CheckoutComponent,
     AddressFormComponent,
-    CardComponent
+    CardComponent,
+    ShopDetailsComponent,
   ],
   imports: [CommonModule, MaterialModule, RouterModule, ReactiveFormsModule],
   exports: [
