@@ -1,4 +1,8 @@
-<mat-card class="example-card" style="margin-top: 2vh">
+<mat-card
+  class="example-card"
+  style="margin-top: 2vh"
+  *ngFor="let data of cardData"
+>
   <mat-card-header>
     <div mat-card-avatar class="example-header-image"></div>
     <img
@@ -9,25 +13,34 @@
   </mat-card-header>
 
   <mat-card-content>
-    <h3>{{ dummyData?.shopName }}</h3>
+    <h3>{{ data.shopName }}</h3>
   </mat-card-content>
   <mat-card-content>
     <div class="star_button">
       <mat-icon>star</mat-icon>
-      <span>{{ dummyData?.rating?.length == 0 ? 0: dummyData.rating }}</span>
+      <span>{{ data?.rating?.length == 0 ? 0 : data.rating }}</span>
     </div>
     <p>Not Zippian</p>
   </mat-card-content>
   <br />
   <mat-card-content>
-    <p class="content">No offer Applicable</p>
+    <p class="content">
+      <img
+        *ngIf="data.discountPer != 0"
+        src="https://www.svgrepo.com/show/110598/discount-sticker-with-percentage.svg"
+      />{{
+        data?.discountPer == 0
+          ? "No offer Applicable"
+          : data?.discountPer + " " + "% off"
+      }}
+    </p>
     <p class="bar">|</p>
-    <h5>Use Zippy</h5>
+    <h5 style="color: #8f5132">Use Zippy</h5>
   </mat-card-content>
 
   <span><hr /></span>
 
   <mat-card-actions>
-    <button mat-stroked-button color="accent">view</button>
+    <button mat-stroked-button>view</button>
   </mat-card-actions>
 </mat-card>

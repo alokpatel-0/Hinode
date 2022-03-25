@@ -36,5 +36,10 @@ export class CardScreenService {
       headers: this.headers,
     });
   }
-
+  
+  viewCardOnLandingPage(){
+    return this.http.get(`${this.endpoint}shop` , {
+      headers : this.headers
+    })
+  }
 }

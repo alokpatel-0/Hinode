@@ -40,7 +40,7 @@ export class CardscreenComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCartDetails();
-    // this.calculatePercentage()
+
   }
 
   openSnackBar(message: string, action: string) {
@@ -68,7 +68,7 @@ export class CardscreenComponent implements OnInit {
     const userid = JSON.parse(localStorage.getItem('user')!);
     
     this.cartService.getCartData(userid?.user?._id).subscribe((dataa: any) => {
-      this.loader.hide();
+     this.loader.hide();
       this.dummyCart = dataa.data;
       this.data = dataa;
 

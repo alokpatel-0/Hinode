@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CardScreenService } from 'src/app/shared/services/card-screen.service';
 
 @Component({
   selector: 'app-landing',
@@ -7,9 +8,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LandingComponent implements OnInit {
 
-  constructor() { }
+  cardsData !:any
+
+  constructor(private cartService : CardScreenService) { }
 
   ngOnInit(): void {
+    this.showCard()
+  }
+
+
+
+  showCard(){
+    this.cartService.viewCardOnLandingPage().subscribe((data) => {
+      console.log("data is" , data)
+      this.cardsData = data
+      console.log('carddata', this.cardsData)
+    })
   }
 
 }

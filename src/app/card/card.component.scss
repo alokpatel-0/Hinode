@@ -1,58 +1,80 @@
 .example-card {
-    width: 300px;
-    // height: 40vh;
-    cursor: pointer;
-  }
+  width: 18%;
+  // height: 40vh;
+  cursor: pointer;
+  display: inline-block;
+  margin-right: 4vw;
+  margin-left: 2vw;
+  transition: 1.3s transform cubic-bezier(0.155, 1.105, 0.295, 1.12),
+    0.3s box-shadow,
+    0.3s -webkit-transform cubic-bezier(0.155, 1.105, 0.295, 1.12);
   
-  .example-header-image {
-    background-size: cover;
-  }
+}
 
-  .mat-card-image{
-    display: block;
-    //  margin: auto;
-    width: 50%;
-  }
+.example-card:hover {
+  transform: scale(1);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06);
+}
+.example-header-image {
+  background-size: cover;
+}
 
-  .mat-stroked-button{
-    margin: 0;
-    // position: absolute;
-    margin-bottom: 1vh;
-    left: 38%;
-    transform: translateY(-50%);
-    display: flex;
-  }
-  
-  h3{
-      margin: auto;
-      text-align: center;
-  }
+.mat-card-image {
+  display: block;
+  //  margin: auto;
+  width: 50%;
+}
 
-  p{
-     margin-left: 9vw;
-     margin-top: -3vh;
-  }
-  .content{
-      margin-left: 3px;
-      font-size: 10px;
-  }
-  .bar{
-      margin-left: 7vw;
-      font-size: 18px;
-      margin-top: -4vh;
-  }
+.mat-stroked-button {
+  margin: 0;
+  // position: absolute;
+  margin-bottom: 1vh;
+  left: 38%;
+  transform: translateY(-50%);
+  display: flex;
+}
 
-  h5{
-      margin-left: 10vw;
-      margin-top: -4vh;
-      font-size: 16px;
-  }
+h3 {
+  margin: auto;
+  text-align: center;
+}
 
-  .star_button{
-    text-decoration: none;
-    border: none;
-    outline: none;
-    background-color: greenyellow;
-    color: white;
-    width: 2.5vw;
-  }
+p {
+  margin-left: 9vw;
+  margin-top: -3vh;
+}
+.content {
+  margin-left: 3px;
+  font-size: 10px;
+}
+.bar {
+  margin-left: 7vw;
+  font-size: 18px;
+  margin-top: -4vh;
+}
+.content img {
+  width: 2vw;
+  height: 2vh;
+}
+
+h5 {
+  margin-left: 10vw;
+  margin-top: -4vh;
+  font-size: 1vw;
+}
+
+.star_button {
+  text-decoration: none;
+  border: none;
+  outline: none;
+  background-color: greenyellow;
+  color: white;
+  width: 2.5vw;
+}
+
+.mat-stroked-button{
+  font-size: 2vh;
+}
+.mat-stroked-button:hover{
+  color:blue
+}

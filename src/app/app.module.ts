@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CardscreenComponent } from './cardscreen/cardscreen.component';
 import { HttpClientModule } from '@angular/common/http';
 
-import { CardComponent } from './card/card.component';
+// import { CardComponent } from './card/card.component';
 import { AuthModule } from './auth/auth.module';
 import { MaterialModule } from './material.module';
 
@@ -20,7 +20,7 @@ import { SellerModule } from './seller/seller.module';
 @NgModule({
   declarations: [
     AppComponent,
-    CardComponent,
+  
     CardscreenComponent,
     BillingDetailsComponent,
     DialogBoxComponent,

@@ -1,36 +1,25 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { dummyData } from './cardData';
+import { records } from '../shared/models/cardData';
 
-interface records {
-  rating: Array<number>;
-  feedback: Array<string>;
-  _id: string;
-  shopName: string;
-  shopContactNumber: string;
-  openTime: string;
-  closeTime: string;
-  address: string;
-  state: string;
-  city: string;
-  postalCode: string;
-  landmark: string;
-  discountPer: number;
-  ownerName: string;
-  ownerEmail: string;
-  registeredDate: string;
-  status: boolean;
-}
+import { CardScreenService } from 'src/app/shared/services/card-screen.service';
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss'],
 })
 export class CardComponent implements OnInit {
-  @Input() data!: records;
+  cardData!: records[];
+  constructor(private cardservice: CardScreenService) {}
 
-  dummyData: records = dummyData;
+  ngOnInit(): void {
+    this.showCard();
+  }
 
-  constructor() {}
-
-  ngOnInit(): void {}
+  showCard() {
+    this.cardservice.viewCardOnLandingPage().subscribe((data: any) => {
+      // console.log('data is', data);
+      this.cardData = data.data;
+      // console.log('carddata', this.cardData);
+    });
+  }
 }
