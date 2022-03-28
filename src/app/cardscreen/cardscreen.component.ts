@@ -32,7 +32,7 @@ export class CardscreenComponent implements OnInit {
   finalDisountedValue: number = 0;
   productPrice: number = 0;
   discountedpercentValue: number = 0;
-  discountPercentage : number = 0
+  discountPercentage: number = 0;
 
   constructor(
     private cartService: CardScreenService,
@@ -67,13 +67,18 @@ export class CardscreenComponent implements OnInit {
     this.loader.show();
     const userid = JSON.parse(localStorage.getItem('user')!);
 
-    this.cartService.getCartData(userid?.user?._id).subscribe((dataa: any) => {
-      this.loader.hide();
-      this.dummyCart = dataa.data;
-      this.data = dataa;
+    this.cartService.getCartData(userid?.user?._id).subscribe(
+      (dataa: any) => {
+        this.loader.hide();
+        this.dummyCart = dataa.data;
+        this.data = dataa;
 
-      this.calculatePercentage();
-    });
+        this.calculatePercentage();
+      },
+      (err: any) => {
+        this.loader.hide();
+      }
+    );
   }
 
   removeCartData(data: any) {
@@ -89,7 +94,6 @@ export class CardscreenComponent implements OnInit {
     this.cartService.removeCartDataFromJson(payload).subscribe((daa) => {
       this.getCartDetails();
       this.openSnackBar('Delete Data Succesfully', 'ok');
-  
     });
   }
 
@@ -105,7 +109,6 @@ export class CardscreenComponent implements OnInit {
     this.cartService.incrementCartData(payload).subscribe((daa) => {
       const itemId = data?.l.id;
       this.getCartDetails();
-      
     });
   }
 
@@ -133,7 +136,7 @@ export class CardscreenComponent implements OnInit {
     this.orderquantity = 0;
     this.discountvalue = 0;
     this.productPrice = 0;
-    this.finalValue = 0
+    this.finalValue = 0;
 
     this.dummyCart?.map((discount: any) => {
       this.price = discount.l.q.productprice;

@@ -16,6 +16,10 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatSelectModule } from '@angular/material/select';
+import { MatTableModule } from '@angular/material/table';
+import { MatToolbarModule } from '@angular/material/toolbar';
+
+
 
 const modules = [
   MatSliderModule,
@@ -35,6 +39,9 @@ const modules = [
   MatSlideToggleModule,
   MatStepperModule,
   MatSelectModule,
+  MatTableModule,
+  MatToolbarModule,
+  
 ];
 
 @NgModule({

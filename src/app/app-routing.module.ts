@@ -8,6 +8,7 @@ import { LandingComponent } from './core/landing/landing.component';
 import { ShopDetailsComponent } from './core/shop-details/shop-details.component';
 import { ProductComponent } from './seller/product/product.component';
 import { AddProductFormComponent } from './seller/add-product-form/add-product-form.component';
+import { OrderDetailsComponent } from './order-details/order-details.component';
 
 const routes: Routes = [
   {
@@ -36,12 +37,12 @@ const routes: Routes = [
     path: 'address',
     component: AddressFormComponent,
   },
-  { path: 'card', component: CardComponent },
   { path: 'shop/:id', component: ShopDetailsComponent },
   {
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
   },
+  {path: 'orderList' , component: OrderDetailsComponent}
 ];
 
 @NgModule({
