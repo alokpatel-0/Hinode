@@ -89,7 +89,7 @@ export class CardscreenComponent implements OnInit {
     this.cartService.removeCartDataFromJson(payload).subscribe((daa) => {
       this.getCartDetails();
       this.openSnackBar('Delete Data Succesfully', 'ok');
-      // window.location.reload();
+  
     });
   }
 
@@ -105,7 +105,7 @@ export class CardscreenComponent implements OnInit {
     this.cartService.incrementCartData(payload).subscribe((daa) => {
       const itemId = data?.l.id;
       this.getCartDetails();
-      // window.location.reload();
+      
     });
   }
 

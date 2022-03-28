@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { ICategory, IShopDetail } from 'src/app/shared/models/shopDetails';
+import { LoaderService } from 'src/app/shared/services/loader.service';
 import { ShopDetailsService } from 'src/app/shared/services/shop-details.service';
 
 @Component({
@@ -16,7 +17,9 @@ export class ShopDetailsComponent implements OnInit {
 
   constructor(
     private activateRoute: ActivatedRoute,
-    private shopDetailService: ShopDetailsService
+    private shopDetailService: ShopDetailsService,
+    private loader: LoaderService
+
   ) {}
 
   ngOnInit(): void {
@@ -32,11 +35,15 @@ export class ShopDetailsComponent implements OnInit {
   }
 
   fetchDataWithParams() {
+
     this.activateRoute.params.subscribe((queryParamsResponse: any) => {
+      this.loader.show()
       if (queryParamsResponse.id) {
         this.shopDetailService
           .getShopDataWithId(queryParamsResponse.id)
-          .subscribe((response: any) => {
+          .subscribe(
+            (response: any) => {
+             this.loader.hide();
             this.allShopData = response.data;
             this.availableCatergory = this.availableCatergory.filter(
               (availCat: any) =>
@@ -45,7 +52,13 @@ export class ShopDetailsComponent implements OnInit {
                 )[0]
             );
             this.handleCategoryClick(response.data[0].categoryName, 0);
-          });
+          },
+          (error)=>{
+               this.loader.hide();
+               console.log('Error while getting data with params')
+          }
+          );
+
       }
     });
   }

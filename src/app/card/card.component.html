@@ -1,4 +1,4 @@
-<mat-card class="example-card" style="margin-top: 2vh" [routerLink]="[shopId]">
+<mat-card class="example-card" style="margin-top: 2vh" [routerLink]="[data._id]">
   <mat-card-header>
     <div mat-card-avatar class="example-header-image"></div>
     <img
@@ -10,6 +10,7 @@
 
   <mat-card-content>
     <h3>{{ data.shopName }}</h3>
+    <!-- {{ data | json }} -->
   </mat-card-content>
   <mat-card-content class="d-flex flex-row justify-content-between">
     <div

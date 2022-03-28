@@ -23,6 +23,7 @@ export class LandingComponent implements OnInit {
       this.cardsData = data?.data;
       this.cardsData.map((data:any) => {
             this.shopId = data._id
+            console.log(this.shopId)
       })
     });
   }
