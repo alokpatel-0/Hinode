@@ -239,12 +239,14 @@
             >Stripe</mat-radio-button
           >
           <button
+            (click)="payment.initializeStripePayment(25)"
             *ngIf="paymentRadioGroup.get('paymentOption')?.value === 'stripe'"
             class="w-25 btn btn-success"
             [disabled]="paymentButtonsDisable"
           >
             Pay Now
           </button>
+
           <mat-radio-button class="m-1 mx-4 fs-5" value="razorpay"
             >Razorpay</mat-radio-button
           >
