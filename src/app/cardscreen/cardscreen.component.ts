@@ -31,7 +31,8 @@ export class CardscreenComponent implements OnInit {
   finalSellingPrice: number = 0;
   finalDisountedValue: number = 0;
   productPrice: number = 0;
-  discountedpercentValue : number = 0;
+  discountedpercentValue: number = 0;
+  discountPercentage : number = 0
 
   constructor(
     private cartService: CardScreenService,
@@ -88,7 +89,7 @@ export class CardscreenComponent implements OnInit {
     this.cartService.removeCartDataFromJson(payload).subscribe((daa) => {
       this.getCartDetails();
       this.openSnackBar('Delete Data Succesfully', 'ok');
-      window.location.reload();
+  
     });
   }
 
@@ -104,7 +105,7 @@ export class CardscreenComponent implements OnInit {
     this.cartService.incrementCartData(payload).subscribe((daa) => {
       const itemId = data?.l.id;
       this.getCartDetails();
-      window.location.reload();
+      
     });
   }
 
@@ -128,7 +129,11 @@ export class CardscreenComponent implements OnInit {
     this.sellingPrice = 0;
     this.finalSellingPrice = 0;
     this.finalDisountedValue = 0;
-    this.discountedpercentValue = 0
+    this.discountedpercentValue = 0;
+    this.orderquantity = 0;
+    this.discountvalue = 0;
+    this.productPrice = 0;
+    this.finalValue = 0
 
     this.dummyCart?.map((discount: any) => {
       this.price = discount.l.q.productprice;
@@ -138,12 +143,12 @@ export class CardscreenComponent implements OnInit {
       this.price = this.price * this.orderquantity;
       this.finalValue = this.finalValue + this.price;
 
-      const discountPercentage = discount.l.q.discount;
+      this.discountPercentage = discount.l.q.discount;
 
       this.productPrice = discount.l.q.productprice;
 
-       this.discountedpercentValue =
-        (discountPercentage * this.productPrice) / 100;
+      this.discountedpercentValue =
+        (this.discountPercentage * this.productPrice) / 100;
 
       this.sellingPrice =
         this.productPrice * this.orderquantity -

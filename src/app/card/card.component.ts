@@ -8,17 +8,11 @@ import { CardScreenService } from 'src/app/shared/services/card-screen.service';
   styleUrls: ['./card.component.scss'],
 })
 export class CardComponent implements OnInit {
-  cardData!: records[];
+  @Input() data!: records;
+  @Input() shopId!: records;
   constructor(private cardservice: CardScreenService) {}
 
-  ngOnInit(): void {
-    this.showCard();
-  }
+  ngOnInit(): void {}
 
-  showCard() {
-    this.cardservice.viewCardOnLandingPage().subscribe((data: any) => {
-      this.cardData = data.data;
-     
-    });
-  }
+  
 }
