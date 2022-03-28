@@ -14,6 +14,11 @@ export class AddressService {
     return this.http.post(`${this.API_KEY}users/save-address`, userAddress);
   }
 
+  getAddress() {
+    const custId = this.getCustomerId();
+    return this.http.get(`${this.API_KEY}users/del-address?id=${custId}`);
+  }
+
   getCustomerId() {
     const userData = JSON.parse(localStorage.getItem('user')!);
     if (userData) {

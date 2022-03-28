@@ -34,6 +34,7 @@ export class LoginComponent {
           this.loginForm.reset();
           this.loginForm.markAsPristine();
           this.loginForm.markAsUntouched();
+          this.auth.allDetails.next(response);
         },
         error: (err) => this.snackBar.open(err.error.message, 'OK!', 2500),
       });

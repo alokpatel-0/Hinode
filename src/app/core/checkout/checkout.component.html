@@ -1,49 +1,171 @@
 <div class="container-fluid">
   <mat-card class="m-3">
     <mat-card-title class="d-flex align-items-center justify-content-between">
-      <h6><span class="text-light bg-success px-2 py-1">1</span> LOGIN</h6>
+      <h6
+        [ngClass]="currentCardIndex === 1 ? 'text-success' : 'text-secondary'"
+      >
+        <span
+          class="px-2 py-1"
+          [ngClass]="
+            currentCardIndex === 1
+              ? 'text-light bg-success'
+              : ' text-light bg-secondary'
+          "
+          >1</span
+        >
+        LOGIN
+        <mat-icon class="text-success" *ngIf="currentCardIndex > 1"
+          >check_circle</mat-icon
+        >
+      </h6>
       <button
-        (click)="userLoggedIn = !userLoggedIn"
-        *ngIf="userLoggedIn"
+        (click)="currentCardIndex = 1"
+        *ngIf="userData"
         class="px-5 btn btn-outline-dark"
       >
         Change
       </button>
     </mat-card-title>
-    <mat-card-content *ngIf="!userLoggedIn">
-      <button
-        (click)="userLoggedIn = !userLoggedIn"
-        class="px-5 mx-3 btn btn-outline-success"
-      >
-        Login
-      </button>
-      <button class="px-5 mx-3 btn btn-success">
-        New User? Create Account Here
-      </button>
+    <p
+      class="mx-3"
+      *ngIf="currentCardIndex > 1 && authService.isLogin && userData"
+    >
+      <span class="fw-bold">
+        {{ userData.user?.fullname }}
+      </span>
+      {{ userData.user.email }}
+    </p>
+    <mat-card-content *ngIf="currentCardIndex === 1">
+      <div *ngIf="!authService.isLogin">
+        <button
+          data-bs-toggle="offcanvas"
+          href="#offcanvasExample"
+          class="px-5 mx-3 btn btn-outline-success"
+        >
+          Login
+        </button>
+        <button
+          data-bs-toggle="offcanvas"
+          href="#offcanvasExample"
+          class="px-5 mx-3 btn btn-success"
+        >
+          New User? Create Account Here
+        </button>
+      </div>
+      <div class="mx-5 fs-5" *ngIf="authService.isLogin && userData">
+        <p>
+          Email :
+          <span class="fw-bold">
+            {{ userData.user.email }}
+          </span>
+        </p>
+        <p>
+          Name :
+          <span class="fw-bold">{{ userData.user?.fullname }} </span>
+        </p>
+
+        <a
+          (click)="authService.logOut()"
+          routerLink="/checkout"
+          class="d-block text-decoration-none text-danger"
+        >
+          Logout and Sign in to another account</a
+        >
+        <button
+          class="mt-2 btn btn-outline-success"
+          (click)="changeCardIndexToExpand(2)"
+        >
+          Continue to checkout
+        </button>
+      </div>
     </mat-card-content>
   </mat-card>
   <mat-card class="m-3">
     <mat-card-title class="d-flex align-items-center justify-content-between">
-      <h6>
-        <span class="text-light bg-success px-2 py-1">2</span> DELIVERY ADDRESS
+      <h6
+        [ngClass]="currentCardIndex === 2 ? 'text-success' : 'text-secondary'"
+      >
+        <span
+          class="px-2 py-1"
+          [ngClass]="
+            currentCardIndex === 2
+              ? 'text-light bg-success'
+              : ' text-light bg-secondary'
+          "
+          >2</span
+        >
+        DELIVERY ADRRESS
+        <mat-icon class="text-success" *ngIf="currentCardIndex > 2"
+          >check_circle</mat-icon
+        >
       </h6>
 
       <button
-        (click)="userAddress = []"
-        *ngIf="userAddress.length"
+        (click)="changeCardIndexToExpand(2)"
+        *ngIf="currentCardIndex > 2"
         class="px-5 btn btn-outline-dark"
       >
         Change
       </button>
       <button
         (click)="router.navigate(['address'])"
-        *ngIf="!userAddress.length"
+        *ngIf="currentCardIndex === 2"
         class="px-5 btn btn-outline-dark"
       >
         Add New Address
       </button>
     </mat-card-title>
-    <mat-card-content>
+    <div *ngIf="currentCardIndex > 2">
+      <div *ngIf="userAddress.length !== 0">
+        <div class="selectedAddress" *ngFor="let address of userAddress">
+          <div class="ms-4 mt-1" *ngIf="address._id === getSelectedAddress()">
+            <p class="m-0 fs-6">
+              <span class="mx-1 fw-bold">{{ address.name }}</span
+              >,
+              <span class="mx-1 fw-bold">{{ address.mobileNumber }}</span>
+            </p>
+            <p class="m-0 fs-6">
+              {{ address.address }}, {{ address.city }} , {{ address.state }} -
+              {{ address.postalCode }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <mat-card-content *ngIf="currentCardIndex === 2">
+      <div class="w-25 m-3">
+        <form [formGroup]="addressRadioGroup">
+          <mat-radio-group formControlName="deliveryAddress">
+            <mat-radio-button
+              *ngFor="let address of userAddress"
+              [value]="address._id"
+            >
+              <div class="my-3 mx-1">
+                <p class="m-0 fs-6">
+                  <span class="mx-1 fw-bold">{{ address.name }}</span
+                  >,
+                  <span class="mx-1 fw-bold">{{ address.mobileNumber }}</span>
+                </p>
+                <p class="m-0 fs-6">
+                  {{ address.address }}, {{ address.city }} ,
+                  {{ address.state }} -
+                  {{ address.postalCode }}
+                </p>
+                <button
+                  *ngIf="
+                    addressRadioGroup.get('deliveryAddress')?.value ===
+                    address._id
+                  "
+                  (click)="changeCardIndexToExpand(3)"
+                  class="px-5 my-2 btn btn-success"
+                >
+                  Deliver Here
+                </button>
+              </div>
+            </mat-radio-button>
+          </mat-radio-group>
+        </form>
+      </div>
       <div *ngIf="!userAddress.length" class="text-center">
         <h6>No delivery address found</h6>
         <p>Add delivery address by clicking 'Add New Address' buttton</p>
@@ -55,56 +177,82 @@
   </mat-card>
   <mat-card class="m-3">
     <mat-card-title class="d-flex align-items-center justify-content-between">
-      <h6>
-        <span class="text-light bg-success px-2 py-1">3</span> ORDER SUMMARY
+      <h6
+        [ngClass]="currentCardIndex === 3 ? 'text-success' : 'text-secondary'"
+      >
+        <span
+          class="px-2 py-1"
+          [ngClass]="
+            currentCardIndex === 3
+              ? 'text-light bg-success'
+              : ' text-light bg-secondary'
+          "
+          >3</span
+        >
+        ORDER SUMMARY
+        <mat-icon class="text-success" *ngIf="currentCardIndex > 3"
+          >check_circle</mat-icon
+        >
       </h6>
       <button
-        (click)="orderSummaryContinue = !orderSummaryContinue"
-        *ngIf="orderSummaryContinue"
+        (click)="changeCardIndexToExpand(3)"
+        *ngIf="currentCardIndex > 3"
         class="px-5 btn btn-outline-dark"
       >
         Change
       </button>
     </mat-card-title>
-    <mat-card-content>
+    <mat-card-content *ngIf="currentCardIndex >= 3">
       <h6 class="mx-5 mt-4">Item 1</h6>
     </mat-card-content>
-    <mat-card-actions align="end">
-      <button
-        *ngIf="!orderSummaryContinue"
-        class="px-5 btn btn-success"
-        (click)="orderSummaryContinue = !orderSummaryContinue"
-      >
+    <mat-card-actions *ngIf="currentCardIndex === 3" align="end">
+      <button class="px-5 btn btn-success" (click)="changeCardIndexToExpand(4)">
         CONTINUE
       </button>
     </mat-card-actions>
   </mat-card>
   <mat-card class="m-3">
     <mat-card-title>
-      <h6>
-        <span class="text-light bg-success px-2 py-1">4</span> PAYMENT OPTIONS
+      <h6
+        [ngClass]="currentCardIndex === 4 ? 'text-success' : 'text-secondary'"
+      >
+        <span
+          class="px-2 py-1"
+          [ngClass]="
+            currentCardIndex === 4
+              ? 'text-light bg-success'
+              : ' text-light bg-secondary'
+          "
+          >4</span
+        >
+        PAYMENT OPTIONS
       </h6>
     </mat-card-title>
-    <mat-card-content class="mt-3">
+    <mat-card-content *ngIf="currentCardIndex === 4" class="mt-3">
       <form [formGroup]="paymentRadioGroup">
         <mat-radio-group
           formControlName="paymentOption"
           class="d-flex flex-column"
           aria-label="Select an option"
         >
-          <mat-radio-button class="m-1" value="stripe">Stripe</mat-radio-button>
+          <mat-radio-button class="m-1 mx-4 fs-5" value="stripe"
+            >Stripe</mat-radio-button
+          >
           <button
             *ngIf="paymentRadioGroup.get('paymentOption')?.value === 'stripe'"
             class="w-25 btn btn-success"
+            [disabled]="paymentButtonsDisable"
           >
             Pay Now
           </button>
-          <mat-radio-button class="m-1" value="razorpay"
+          <mat-radio-button class="m-1 mx-4 fs-5" value="razorpay"
             >Razorpay</mat-radio-button
           >
           <button
+            (click)="handleRazorpay()"
             *ngIf="paymentRadioGroup.get('paymentOption')?.value === 'razorpay'"
             class="w-25 btn btn-success"
+            [disabled]="paymentButtonsDisable"
           >
             Pay Now
           </button>
