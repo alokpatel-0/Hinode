@@ -1,18 +1,15 @@
 import { HttpClient } from '@angular/common/http';
-import { HostListener, Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { AddressService } from './address.service';
 import { LoaderService } from './loader.service';
 import { SnackbarService } from './snackbar.service';
 
-declare var Razorpay: any;
-
 @Injectable({
   providedIn: 'root',
 })
-export class PaymentService {
+export class PaymentService implements OnInit {
   constructor(
     public http: HttpClient,
     public addressService: AddressService,
@@ -20,6 +17,8 @@ export class PaymentService {
     public loading: LoaderService,
     public snackbar: SnackbarService
   ) {}
+
+  ngOnInit(): void {}
 
   options = {
     key: environment.razorpayKey,
@@ -76,5 +75,23 @@ export class PaymentService {
     this.loading.show();
 
     return this.http.post(`${environment.devUrl}payment/create-payment`, data);
+  }
+
+  initializeStripePayment(amount: number) {
+    const paymentHandler = (<any>window).StripeCheckout.configure({
+      key: environment.stripeKey,
+      locale: 'auto',
+      token: (stripeToken: any) => {
+        console.log({ stripeToken });
+        this.router.navigate(['shop']);
+        this.snackbar.open('Payment Success!', 'YAY!', 3000);
+      },
+    });
+
+    paymentHandler.open({
+      name: 'Zippy',
+      description: 'Buying an Item from Shop',
+      amount: amount * 100,
+    });
   }
 }

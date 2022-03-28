@@ -1,10 +1,11 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AddressService } from 'src/app/shared/services/address.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { PaymentService } from 'src/app/shared/services/payment.service';
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-checkout',
@@ -17,6 +18,8 @@ export class CheckoutComponent implements OnInit {
   selectedUserAddress: any;
   userAddress: Array<any> = [];
   paymentButtonsDisable: boolean = false;
+  paymentHandler: any = null;
+  stripe: any;
 
   addressRadioGroup = this.fb.group({
     deliveryAddress: new FormControl('', [Validators.required]),
@@ -47,6 +50,7 @@ export class CheckoutComponent implements OnInit {
     if (this.authService.isLogin) {
       this.userData = this.authService.getUserFromLocalStorage();
     }
+    this.invokeStripe();
   }
 
   fetchUserData() {
@@ -82,5 +86,21 @@ export class CheckoutComponent implements OnInit {
 
   handleRazorpay() {
     this.payment.handleRazorPay(this.addressRadioGroup.value);
+  }
+
+  invokeStripe() {
+    if (!window.document.getElementById('stripe-script')) {
+      const script = window.document.createElement('script');
+      script.id = 'stripe-script';
+      script.type = 'text/javascript';
+      script.src = 'https://checkout.stripe.com/checkout.js';
+      script.onload = () => {
+        this.paymentHandler = (<any>window).StripeCheckout.configure({
+          key: environment.stripeKey,
+          locale: 'auto',
+        });
+      };
+      window.document.body.appendChild(script);
+    }
   }
 }

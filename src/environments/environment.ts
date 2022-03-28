@@ -7,6 +7,8 @@ export const environment = {
 
   devUrl: 'https://boiling-oasis-93504.herokuapp.com/',
   razorpayKey: 'rzp_test_OtEZYvzOID64qu',
+  stripeKey:
+    'pk_test_51KiCLrSH8yh8kuerfe1mrsK6GZQo6a1xlOI1GZojnywTABV37HFGXsUME6jZgCwBEO3UEXhSuFt1bC6qT22F0Yha004TwpUStJ',
 };
 
 /*
