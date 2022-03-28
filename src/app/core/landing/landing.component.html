@@ -57,6 +57,10 @@
 
 <!-- TODO: To be removed after cards are added! -->
 
-<div class="container-fluid dummy-text mt-3 mb-4">
-   <app-card></app-card>
+<div class="container-fluid dummy-text float-start w-75">
+  <app-card
+    *ngFor="let data of cardsData"
+    [data]="data"
+    [shopId]="shopId"
+  ></app-card>
 </div>

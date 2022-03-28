@@ -4,24 +4,29 @@ import { CardScreenService } from 'src/app/shared/services/card-screen.service';
 @Component({
   selector: 'app-landing',
   templateUrl: './landing.component.html',
-  styleUrls: ['./landing.component.scss']
+  styleUrls: ['./landing.component.scss'],
 })
 export class LandingComponent implements OnInit {
+  cardsData!: any;
+  shopId!: any;
 
-  cardsData !:any
-
-  constructor(private cartService : CardScreenService) { }
+  constructor(private cartService: CardScreenService) {}
 
   ngOnInit(): void {
-    this.showCard()
+    this.showCard();
   }
 
+  showCard() {
+    this.cartService.viewCardOnLandingPage().subscribe((data: any) => {
+     
 
-
-  showCard(){
-    this.cartService.viewCardOnLandingPage().subscribe((data) => {
-      this.cardsData = data
-    })
+      this.cardsData = data?.data;
+      this.cardsData.map((data:any) => {
+            this.shopId = data._id
+      })
+    });
   }
 
+  
+  
 }

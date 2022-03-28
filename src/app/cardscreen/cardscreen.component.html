@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid" >
   <div class="header">
     <h4>My Cart({{ cartProduct }})</h4>
     <p
@@ -8,7 +8,7 @@
     </p>
     <hr />
     <div *ngFor="let data of dummyCart" class="content">
-      <div class="row">
+      <div class="row d-flex" >
         <div class="col-sm-2 border border-dark">
           <img src="{{devUrl+data?.imageUrl![0]}}" />
         </div>
@@ -28,7 +28,7 @@
               >{{ data?.l?.q?.productprice | currency: "INR":true:"2.0" }}</span
             >
             <p
-              style="margin-left: 8vw; margin-top: -2vh; color: green"
+              style="margin-left: 10rem; margin-top: -2vh; color: green ; position : relative"
               *ngIf="data?.l?.q?.discount != null"
             >
               {{ data?.l?.q?.discount }}% Off
@@ -55,6 +55,7 @@
             class="counter"
             style="background-color: #efefef"
             (click)="incrementCart(data)"
+            [disabled] = "data?.l?.orderQuantity == 10"
           >
             +
           </button>

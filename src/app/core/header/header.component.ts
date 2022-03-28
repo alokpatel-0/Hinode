@@ -1,5 +1,7 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { CardscreenComponent } from 'src/app/cardscreen/cardscreen.component';
+import { CardScreenService } from 'src/app/shared/services/card-screen.service';
 
 @Component({
   selector: 'app-header',
@@ -8,7 +10,9 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 })
 export class HeaderComponent implements OnInit {
   hideNavbar: boolean = false;
-
+  @Input() cartProduct!: number;
+  dummyCart: any;
+  dummyCartLength: any;
   @HostListener('window:scroll')
   scrollHandler() {
     const svgBg = document.getElementById('svgBg');
@@ -30,10 +34,27 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  constructor(public auth: AuthService) {}
+  constructor(
+    public auth: AuthService,
+    private cartService: CardScreenService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getCartData();
+  }
   handleLogout() {
     this.auth.logOut();
   }
+
+  getCartData() {
+    const userid = JSON.parse(localStorage.getItem('user')!);
+
+    this.cartService.getCartData(userid?.user?._id).subscribe((dataa: any) => {
+      this.dummyCart = dataa.data;
+      this.dummyCartLength = this.dummyCart.length;
+     
+    });
+
+  }
 }
+

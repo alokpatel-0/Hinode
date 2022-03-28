@@ -1,8 +1,27 @@
- <div><h3 class="allDetails">Billing details</h3></div>
-      <hr>
-      <div class="details"><h5>Price({{cartProduct}})<span>{{price | currency: 'INR' :true:'2.0'}}</span></h5></div><br>
-      <div class="details"><h5>Discount <span style="color: green;">-{{discount | currency : 'INR' }}</span></h5></div><br>
-      <div class="details"><h5>Selling Price <span>{{sellingPrice | currency : 'INR' :true:'1.0'}}</span></h5></div><br>
-      <div class="details"><h5>Delievery Charges  <span>{{  delieveryCharges  | currency : 'INR':true:'1.0'}}</span></h5></div><br>
-      <hr>
-      <div class="details"><h5>Total  <span>{{  total | currency : 'INR' :true:'2.0'}}</span></h5></div><br>
+ <div class="w-100">
+  <mat-card class="mat-elevation-z0">
+    <mat-card-title> Billing Details </mat-card-title>
+    <hr />
+    <mat-card-content>
+      <ul class="list-group">
+        <li class="list-group-item border border-0">
+          Price <span class="float-end">{{price | currency: 'INR' :true:'2.0'}}</span>
+        </li>
+        <li class="list-group-item border border-0">
+          Discount <span class="float-end">-{{discount | currency : 'INR' }}</span>
+        </li>
+        <li class="list-group-item border border-0">
+          Selling Price <span class="float-end">{{sellingPrice | currency : 'INR' :true:'1.0'}}</span>
+        </li>
+        <li class="list-group-item border border-0">
+          <span> Delivery Charges </span>
+          <span class="float-end">{{  delieveryCharges  | currency : 'INR':true:'1.0'}}</span>
+        </li>
+        <hr />
+        <li class="list-group-item border border-0">
+          <strong> Total Amount <span class="float-end">{{  total | currency : 'INR' :true:'2.0'}}</span> </strong>
+        </li>
+      </ul>
+    </mat-card-content>
+  </mat-card>
+</div>
