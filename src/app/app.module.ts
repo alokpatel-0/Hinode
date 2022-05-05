@@ -15,14 +15,15 @@ import { BillingDetailsComponent } from './billing-details/billing-details.compo
 import { DialogBoxComponent } from './cardscreen/dialog-box/dialog-box.component';
 import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 import { SellerModule } from './seller/seller.module';
+import { OrderDetailsComponent } from './order-details/order-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-  
     CardscreenComponent,
     BillingDetailsComponent,
     DialogBoxComponent,
+    OrderDetailsComponent,
   ],
   imports: [
     BrowserModule,
